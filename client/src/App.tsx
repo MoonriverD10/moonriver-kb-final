@@ -7,10 +7,17 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
 
+import PlaceholderPage from "@/pages/PlaceholderPage";
+
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/financial"} component={PlaceholderPage} />
+      <Route path={"/project-mgmt"} component={PlaceholderPage} />
+      <Route path={"/estimating"} component={PlaceholderPage} />
+      <Route path={"/insurance"} component={PlaceholderPage} />
+      <Route path={"/closeout"} component={PlaceholderPage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
