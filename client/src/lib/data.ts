@@ -10,6 +10,7 @@ export interface Document {
   lastUpdated: string;
   tags: string[];
   icon: any;
+  path: string; // Added path field
 }
 
 export const documents: Document[] = [
@@ -22,8 +23,46 @@ export const documents: Document[] = [
     fileType: "docx",
     lastUpdated: "Dec 16, 2025",
     tags: ["sov", "affidavit", "pay-app", "finance"],
-    icon: FileSpreadsheet
+    icon: FileSpreadsheet,
+    path: "/documents/Affidavit_of_SubcontractorSOV_CASTLE.docx"
   },
+  {
+    id: "affidavit-pdf",
+    title: "Affidavit of Subcontractor (PDF)",
+    description: "Original PDF form for Affidavit of Subcontractor (Appendix C).",
+    category: "Financial",
+    type: "template",
+    fileType: "pdf",
+    lastUpdated: "Dec 16, 2025",
+    tags: ["affidavit", "form", "legal"],
+    icon: FileText,
+    path: "/documents/AffidavitofSbucontractorAppC_CASTLE_Mo.pdf"
+  },
+  {
+    id: "bid-doc-castle",
+    title: "Bid Document - CASTLE",
+    description: "Bid document for O'Fallon Center for Advanced Skills in Law Enforcement Training Center.",
+    category: "Estimating",
+    type: "example",
+    fileType: "docx",
+    lastUpdated: "Dec 18, 2025",
+    tags: ["bid", "proposal", "example"],
+    icon: FilePen,
+    path: "/documents/Bid-OfallonCenterforAdvancedSkillsinLawEnforcementTrainingCenter.docx"
+  },
+  {
+    id: "contract-castle",
+    title: "Contract - CASTLE (Signed)",
+    description: "Signed contract for O'Fallon CASTLE project with DocuSign.",
+    category: "Project Management",
+    type: "example",
+    fileType: "pdf",
+    lastUpdated: "Dec 18, 2025",
+    tags: ["contract", "signed", "legal"],
+    icon: FileBadge,
+    path: "/documents/Complete_with_DocuSign_25010110126_CASTLE_Mo.pdf"
+  },
+  // Placeholders for other files not yet uploaded
   {
     id: "change-order-proposal",
     title: "Change Order Proposal Template",
@@ -33,7 +72,8 @@ export const documents: Document[] = [
     fileType: "pdf",
     lastUpdated: "Dec 15, 2025",
     tags: ["change-order", "proposal", "contract"],
-    icon: FilePen
+    icon: FilePen,
+    path: "#"
   },
   {
     id: "gemini-pricing",
@@ -44,7 +84,8 @@ export const documents: Document[] = [
     fileType: "xlsx",
     lastUpdated: "Dec 13, 2025",
     tags: ["pricing", "gemini", "estimating", "catalog"],
-    icon: FileText
+    icon: FileText,
+    path: "#"
   },
   {
     id: "closeout-maintenance",
@@ -55,7 +96,8 @@ export const documents: Document[] = [
     fileType: "doc",
     lastUpdated: "Dec 10, 2025",
     tags: ["closeout", "warranty", "maintenance", "handover"],
-    icon: FileCheck
+    icon: FileCheck,
+    path: "#"
   },
   {
     id: "signage-takeoff",
@@ -66,7 +108,8 @@ export const documents: Document[] = [
     fileType: "docx",
     lastUpdated: "Dec 9, 2025",
     tags: ["takeoff", "estimating", "example"],
-    icon: FileText
+    icon: FileText,
+    path: "#"
   },
   {
     id: "warranty-info",
@@ -77,7 +120,8 @@ export const documents: Document[] = [
     fileType: "doc",
     lastUpdated: "Dec 1, 2025",
     tags: ["warranty", "maintenance", "example"],
-    icon: FileBadge
+    icon: FileBadge,
+    path: "#"
   },
   {
     id: "lien-waiver-unconditional",
@@ -88,7 +132,8 @@ export const documents: Document[] = [
     fileType: "doc",
     lastUpdated: "Nov 26, 2025",
     tags: ["lien-waiver", "legal", "pay-app"],
-    icon: FileWarning
+    icon: FileWarning,
+    path: "#"
   },
   {
     id: "change-order-example",
@@ -99,7 +144,8 @@ export const documents: Document[] = [
     fileType: "pdf",
     lastUpdated: "Nov 25, 2025",
     tags: ["change-order", "example", "contract"],
-    icon: FileText
+    icon: FileText,
+    path: "#"
   },
   {
     id: "coi-sample",
@@ -110,7 +156,8 @@ export const documents: Document[] = [
     fileType: "pdf",
     lastUpdated: "Nov 21, 2025",
     tags: ["insurance", "coi", "legal"],
-    icon: FileBadge
+    icon: FileBadge,
+    path: "#"
   },
   {
     id: "lien-waiver-combined",
@@ -121,7 +168,8 @@ export const documents: Document[] = [
     fileType: "pdf",
     lastUpdated: "Nov 21, 2025",
     tags: ["lien-waiver", "legal", "example"],
-    icon: FileText
+    icon: FileText,
+    path: "#"
   },
   {
     id: "coi-requirements",
@@ -132,7 +180,8 @@ export const documents: Document[] = [
     fileType: "doc",
     lastUpdated: "Nov 15, 2025",
     tags: ["insurance", "coi", "checklist"],
-    icon: FileCheck
+    icon: FileCheck,
+    path: "#"
   },
   {
     id: "sov-example",
@@ -143,7 +192,8 @@ export const documents: Document[] = [
     fileType: "doc",
     lastUpdated: "Nov 15, 2025",
     tags: ["sov", "finance", "example"],
-    icon: FileSpreadsheet
+    icon: FileSpreadsheet,
+    path: "#"
   },
   {
     id: "trello-checklist",
@@ -154,7 +204,8 @@ export const documents: Document[] = [
     fileType: "docx",
     lastUpdated: "Nov 15, 2025",
     tags: ["trello", "checklist", "setup", "pm"],
-    icon: FileCheck
+    icon: FileCheck,
+    path: "#"
   },
   {
     id: "bid-doc-template",
@@ -165,7 +216,8 @@ export const documents: Document[] = [
     fileType: "docx",
     lastUpdated: "Nov 14, 2025",
     tags: ["bid", "proposal", "template"],
-    icon: FilePen
+    icon: FilePen,
+    path: "#"
   },
   {
     id: "rfp-response",
@@ -176,7 +228,8 @@ export const documents: Document[] = [
     fileType: "doc",
     lastUpdated: "Oct 30, 2025",
     tags: ["rfp", "proposal", "example"],
-    icon: FileText
+    icon: FileText,
+    path: "#"
   }
 ];
 
