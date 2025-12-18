@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",
+    "prebuild": "rm -rf server",
     "build": "rm -rf dist && vite build",
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host",
