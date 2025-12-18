@@ -1,4 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import Login from "@/pages/Login";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
@@ -6,19 +9,17 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
-
-import PlaceholderPage from "@/pages/PlaceholderPage";
-
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/financial"} component={PlaceholderPage} />
-      <Route path={"/project-mgmt"} component={PlaceholderPage} />
-      <Route path={"/estimating"} component={PlaceholderPage} />
-      <Route path={"/insurance"} component={PlaceholderPage} />
-      <Route path={"/closeout"} component={PlaceholderPage} />
-      <Route path={"/404"} component={NotFound} />
+      <Route path="/login" component={Login} />
+      <ProtectedRoute path="/" component={Home} />
+      <ProtectedRoute path="/financial" component={Home} />
+      <ProtectedRoute path="/project-management" component={Home} />
+      <ProtectedRoute path="/estimating" component={Home} />
+      <ProtectedRoute path="/closeout" component={Home} />
+      <ProtectedRoute path="/insurance" component={Home} />
+      <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
@@ -33,14 +34,13 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+      <ThemeProvider defaultTheme="light">
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </AuthProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
