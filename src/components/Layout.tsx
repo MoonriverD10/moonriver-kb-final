@@ -54,10 +54,11 @@ export default function Layout({ children }: LayoutProps) {
       >
         <div className="h-full flex flex-col">
           {/* Logo Area */}
-          <div className="p-6 border-b border-sidebar-border">
-            <h1 className="font-heading font-bold text-xl tracking-tight text-sidebar-foreground">
+          <div className="p-6 border-b border-sidebar-border flex flex-col items-center">
+            <img src="/logo.png" alt="Moon River Academy" className="h-16 w-auto mb-3" />
+            <h1 className="font-heading font-bold text-lg tracking-tight text-sidebar-foreground text-center leading-tight">
               MOON RIVER
-              <span className="block text-sm font-normal text-sidebar-foreground/70 font-mono mt-1">KNOWLEDGE BASE</span>
+              <span className="block text-xs font-normal text-sidebar-foreground/70 font-mono mt-1">ACADEMY</span>
             </h1>
           </div>
 
@@ -104,7 +105,10 @@ export default function Layout({ children }: LayoutProps) {
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header (Mobile Only) */}
         <header className="lg:hidden h-16 border-b border-border bg-card flex items-center justify-between px-4 sticky top-0 z-30">
-          <div className="font-heading font-bold text-lg text-primary">MOON RIVER</div>
+          <div className="flex items-center gap-2">
+            <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
+            <div className="font-heading font-bold text-lg text-primary">MOON RIVER</div>
+          </div>
           <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(!sidebarOpen)}>
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
