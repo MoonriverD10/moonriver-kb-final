@@ -73,7 +73,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 15, 2025",
     tags: ["change-order", "proposal", "contract"],
     icon: FilePen,
-    path: "#"
+    path: "/documents/Change_Order_Proposal_Template.pdf"
   },
   {
     id: "gemini-pricing",
@@ -85,7 +85,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 13, 2025",
     tags: ["pricing", "gemini", "estimating", "catalog"],
     icon: FileText,
-    path: "#"
+    path: "/documents/Gemini_FY25_Pricing_Guide.xlsx"
   },
   {
     id: "closeout-maintenance",
@@ -93,11 +93,11 @@ export const documents: Document[] = [
     description: "Template for project closeout documentation including maintenance instructions and warranty terms.",
     category: "Closeout",
     type: "template",
-    fileType: "doc",
+    fileType: "docx",
     lastUpdated: "Dec 10, 2025",
     tags: ["closeout", "warranty", "maintenance", "handover"],
     icon: FileCheck,
-    path: "#"
+    path: "/documents/Closeout_Maintenance_Warranty.docx"
   },
   {
     id: "signage-takeoff",
@@ -109,7 +109,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 9, 2025",
     tags: ["takeoff", "estimating", "example"],
     icon: FileText,
-    path: "#"
+    path: "/documents/Signage_Takeoff_Example.docx"
   },
   {
     id: "warranty-info",
@@ -117,11 +117,11 @@ export const documents: Document[] = [
     description: "Warranty documentation example from Francis Howell High School project.",
     category: "Closeout",
     type: "example",
-    fileType: "doc",
+    fileType: "docx",
     lastUpdated: "Dec 1, 2025",
     tags: ["warranty", "maintenance", "example"],
     icon: FileBadge,
-    path: "#"
+    path: "/documents/Warranty_Maintenance_Info.docx"
   },
   {
     id: "lien-waiver-unconditional",
@@ -129,11 +129,11 @@ export const documents: Document[] = [
     description: "Standard form for unconditional lien waivers required with pay applications.",
     category: "Financial",
     type: "template",
-    fileType: "doc",
+    fileType: "docx",
     lastUpdated: "Nov 26, 2025",
     tags: ["lien-waiver", "legal", "pay-app"],
     icon: FileWarning,
-    path: "#"
+    path: "/documents/Unconditional_Sub_Lien_Waiver.docx"
   },
   {
     id: "change-order-example",
@@ -145,7 +145,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 25, 2025",
     tags: ["change-order", "example", "contract"],
     icon: FileText,
-    path: "#"
+    path: "/documents/Change_Order_Example_LCS.pdf"
   },
   {
     id: "coi-sample",
@@ -157,7 +157,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 21, 2025",
     tags: ["insurance", "coi", "legal"],
     icon: FileBadge,
-    path: "#"
+    path: "/documents/Sample_COI_Moon_River.pdf"
   },
   {
     id: "lien-waiver-combined",
@@ -169,7 +169,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 21, 2025",
     tags: ["lien-waiver", "legal", "example"],
     icon: FileText,
-    path: "#"
+    path: "/documents/Combined_Lien_Waiver_Sample.pdf"
   },
   {
     id: "coi-requirements",
@@ -177,11 +177,11 @@ export const documents: Document[] = [
     description: "Template for extracting and documenting COI requirements from contracts.",
     category: "Insurance",
     type: "template",
-    fileType: "doc",
+    fileType: "docx",
     lastUpdated: "Nov 15, 2025",
     tags: ["insurance", "coi", "checklist"],
     icon: FileCheck,
-    path: "#"
+    path: "/documents/COI_Requirements_Template.docx"
   },
   {
     id: "sov-example",
@@ -189,11 +189,11 @@ export const documents: Document[] = [
     description: "Example Schedule of Values for WIU Sallee Hall project showing job numbering format.",
     category: "Financial",
     type: "example",
-    fileType: "doc",
+    fileType: "docx",
     lastUpdated: "Nov 15, 2025",
     tags: ["sov", "finance", "example"],
     icon: FileSpreadsheet,
-    path: "#"
+    path: "/documents/Schedule_of_Values_Example.docx"
   },
   {
     id: "trello-checklist",
@@ -205,7 +205,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 15, 2025",
     tags: ["trello", "checklist", "setup", "pm"],
     icon: FileCheck,
-    path: "#"
+    path: "/documents/Trello_Project_Setup_Checklist.docx"
   },
   {
     id: "bid-doc-template",
@@ -217,7 +217,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 14, 2025",
     tags: ["bid", "proposal", "template"],
     icon: FilePen,
-    path: "#"
+    path: "/documents/Latest_Bid_Document_Template.docx"
   },
   {
     id: "rfp-response",
@@ -225,11 +225,11 @@ export const documents: Document[] = [
     description: "Example of a Request for Proposal response (Ponca City Music).",
     category: "Estimating",
     type: "example",
-    fileType: "doc",
+    fileType: "docx",
     lastUpdated: "Oct 30, 2025",
     tags: ["rfp", "proposal", "example"],
     icon: FileText,
-    path: "#"
+    path: "/documents/RFP_Response_Example.docx"
   }
 ];
 
