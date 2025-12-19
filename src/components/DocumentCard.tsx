@@ -63,12 +63,27 @@ export default function DocumentCard({ doc }: DocumentCardProps) {
       </CardContent>
 
       <CardFooter className="p-4 pt-0 flex gap-2">
-        <Button className="flex-1 gap-2 font-medium" size="sm">
-          <Download className="h-4 w-4" />
-          Download
+        <Button 
+          className="flex-1 gap-2 font-medium" 
+          size="sm"
+          asChild
+          disabled={!doc.path || doc.path === "#"}
+        >
+          <a href={doc.path} download={doc.path !== "#"}>
+            <Download className="h-4 w-4" />
+            Download
+          </a>
         </Button>
-        <Button variant="outline" size="icon" className="shrink-0">
-          <Eye className="h-4 w-4" />
+        <Button 
+          variant="outline" 
+          size="icon" 
+          className="shrink-0"
+          asChild
+          disabled={!doc.path || doc.path === "#"}
+        >
+          <a href={doc.path} target="_blank" rel="noopener noreferrer">
+            <Eye className="h-4 w-4" />
+          </a>
         </Button>
       </CardFooter>
     </Card>
