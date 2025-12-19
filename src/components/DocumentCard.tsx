@@ -12,6 +12,27 @@ interface DocumentCardProps {
 export default function DocumentCard({ doc }: DocumentCardProps) {
   const Icon = doc.icon || FileText;
 
+  // Helper to determine if we should use Google Docs Viewer
+  const isOfficeFile = ["docx", "doc", "xlsx", "xls", "pptx", "ppt"].includes(doc.fileType);
+  
+  // Construct the view URL
+  const getViewUrl = () => {
+    if (!doc.path || doc.path === "#") return "#";
+    
+    // If it's an office file, use Google Docs Viewer
+    if (isOfficeFile) {
+      // We need a full absolute URL for Google Docs Viewer to work
+      const baseUrl = window.location.origin;
+      const fullUrl = new URL(doc.path, baseUrl).href;
+      return `https://docs.google.com/viewer?url=${encodeURIComponent(fullUrl)}&embedded=true`;
+    }
+    
+    // Otherwise return the direct path (works for PDF, images, etc.)
+    return doc.path;
+  };
+
+  const viewUrl = getViewUrl();
+
   return (
     <Card className="group hover:shadow-md transition-all duration-300 border-border bg-card overflow-hidden flex flex-col h-full">
       <CardHeader className="p-0">
@@ -81,7 +102,7 @@ export default function DocumentCard({ doc }: DocumentCardProps) {
           asChild
           disabled={!doc.path || doc.path === "#"}
         >
-          <a href={doc.path} target="_blank" rel="noopener noreferrer">
+          <a href={viewUrl} target="_blank" rel="noopener noreferrer">
             <Eye className="h-4 w-4" />
           </a>
         </Button>
