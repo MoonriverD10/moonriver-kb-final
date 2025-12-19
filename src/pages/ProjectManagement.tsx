@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool } from "lucide-react";
+import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare } from "lucide-react";
 
 export default function ProjectManagement() {
   const [activeStep, setActiveStep] = useState("step1");
@@ -234,8 +234,7 @@ export default function ProjectManagement() {
     }
   ];
 
-  // Import icons for the list above
-  const { ShieldCheck, CheckSquare } = require("lucide-react");
+
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
