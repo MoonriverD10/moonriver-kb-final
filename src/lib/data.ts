@@ -24,7 +24,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 16, 2025",
     tags: ["sov", "affidavit", "pay-app", "finance"],
     icon: FileSpreadsheet,
-    path: "/documents/Affidavit_of_SubcontractorSOV_CASTLE.docx"
+    path: "/documents/Schedule of Values (SOV) Affidavit_of_Subcontractor.docx"
   },
   {
     id: "affidavit-pdf",
@@ -73,7 +73,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 15, 2025",
     tags: ["change-order", "proposal", "contract"],
     icon: FilePen,
-    path: "/documents/Change_Order_Proposal_Template.pdf"
+    path: "/documents/Template ChangeOrder_Proposal.pdf"
   },
   {
     id: "gemini-pricing",
@@ -85,7 +85,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 13, 2025",
     tags: ["pricing", "gemini", "estimating", "catalog"],
     icon: FileText,
-    path: "/documents/Gemini_FY25_Pricing_Guide.xlsx"
+    path: "/documents/Gemini FY25_US_COMPLETE_PRICING_GUIDE_R1.xlsx"
   },
   {
     id: "closeout-maintenance",
@@ -97,7 +97,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 10, 2025",
     tags: ["closeout", "warranty", "maintenance", "handover"],
     icon: FileCheck,
-    path: "/documents/Closeout_Maintenance_Warranty.docx"
+    path: "/documents/Closeout Document_ Maintenance & Warranty Data.docx"
   },
   {
     id: "signage-takeoff",
@@ -109,7 +109,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 9, 2025",
     tags: ["takeoff", "estimating", "example"],
     icon: FileText,
-    path: "/documents/Signage_Takeoff_Example.docx"
+    path: "/documents/Creek_County_Sheriff_EOC_Phase_II_-_Signage_Takeoff (1).docx"
   },
   {
     id: "warranty-info",
@@ -121,7 +121,7 @@ export const documents: Document[] = [
     lastUpdated: "Dec 1, 2025",
     tags: ["warranty", "maintenance", "example"],
     icon: FileBadge,
-    path: "/documents/Warranty_Maintenance_Info.docx"
+    path: "/documents/FHHS WARRANTY AND MAINTENANCE INFORMATION.txt"
   },
   {
     id: "lien-waiver-unconditional",
@@ -133,7 +133,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 26, 2025",
     tags: ["lien-waiver", "legal", "pay-app"],
     icon: FileWarning,
-    path: "/documents/Unconditional_Sub_Lien_Waiver.docx"
+    path: "/documents/Unconditional Sub lien waiver form.doc"
   },
   {
     id: "change-order-example",
@@ -145,7 +145,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 25, 2025",
     tags: ["change-order", "example", "contract"],
     icon: FileText,
-    path: "/documents/Change_Order_Example_LCS.pdf"
+    path: "/documents/LCS Change Order CO 001.PDF"
   },
   {
     id: "coi-sample",
@@ -157,7 +157,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 21, 2025",
     tags: ["insurance", "coi", "legal"],
     icon: FileBadge,
-    path: "/documents/Sample_COI_Moon_River.pdf"
+    path: "/documents/Sample COI for Moon River.pdf"
   },
   {
     id: "lien-waiver-combined",
@@ -169,7 +169,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 21, 2025",
     tags: ["lien-waiver", "legal", "example"],
     icon: FileText,
-    path: "/documents/Combined_Lien_Waiver_Sample.pdf"
+    path: "/documents/Sample Lien Waiver Moon River & Manufacturers.pdf"
   },
   {
     id: "coi-requirements",
@@ -181,7 +181,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 15, 2025",
     tags: ["insurance", "coi", "checklist"],
     icon: FileCheck,
-    path: "/documents/COI_Requirements_Template.docx"
+    path: "/documents/COI Requirements Extracted from Takeoff Docs_Contract.txt"
   },
   {
     id: "sov-example",
@@ -193,7 +193,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 15, 2025",
     tags: ["sov", "finance", "example"],
     icon: FileSpreadsheet,
-    path: "/documents/Schedule_of_Values_Example.docx"
+    path: "/documents/SCHEDULE_OF_VALUES_25-007-WIU.docx"
   },
   {
     id: "trello-checklist",
@@ -217,7 +217,7 @@ export const documents: Document[] = [
     lastUpdated: "Nov 14, 2025",
     tags: ["bid", "proposal", "template"],
     icon: FilePen,
-    path: "/documents/Latest_Bid_Document_Template.docx"
+    path: "/documents/Latest 2027 Bid Doc.docx"
   },
   {
     id: "rfp-response",
@@ -229,7 +229,7 @@ export const documents: Document[] = [
     lastUpdated: "Oct 30, 2025",
     tags: ["rfp", "proposal", "example"],
     icon: FileText,
-    path: "/documents/RFP_Response_Example.docx"
+    path: "/documents/RFP 09 Ponca City Music.doc"
   }
 ];
 

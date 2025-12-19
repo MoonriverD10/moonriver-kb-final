@@ -1,0 +1,76 @@
+# COI Requirements Extracted from CORE Construction Contract
+## Job #25-007-WIU Sallee Hall
+
+**Source:** Purchase Agreement dated November 14, 2025
+
+---
+
+## INSURANCE REQUIREMENTS (Page 1-2 of Contract)
+
+**Certificate Holder:**
+CORE Construction Services of Illinois, Inc.
+601 SW Water Street
+Peoria, Illinois 61602
+
+**COI Submission Method:**
+- DO NOT EMAIL COIs to compliance@gaisb.com
+- ONLY UPLOAD COIs VIA THE LINK which will be received from compliancechagisb.com
+- Questions: compliance@gaisb.com
+
+**Certificate Must Include:**
+- Project Name: WIU – Sallee Hall EOC Renovation – Phase 1
+- CORE Project Number: 25-04-058
+
+---
+
+## REQUIRED COVERAGES:
+
+### 1. Workers' Compensation:
+
+**Coverage A:** Statutory Benefits, in required statutory limits for the state in which the work is to be performed (Illinois)
+
+**Coverage B:** Employer's Liability
+- Bodily Injury by accident: $1,000,000 each accident
+- Bodily Injury by disease: $1,000,000 policy limit  
+- Bodily Injury by disease: $1,000,000 each employee
+
+**Additional Requirements:**
+- Coverage must include a Waiver of Subrogation **endorsement** in favor of the Additional Insureds
+- Where applicable, U.S. Longshore and Harbor Workers Compensation Act Endorsement shall be attached to the policy
+
+---
+
+### 2. Commercial Auto Coverage:
+
+- Auto Liability limits of not less than $1,000,000 each accident, combined Bodily Injury and Property Damage Liability insurance
+- Certificate to reflect coverage for "Any Auto" **or** "All Owned, Hired and Non-Owned"
+
+---
+
+### 3. Commercial General Liability:
+
+Limits must meet the minimums set forth below, **or the policy limit, whichever is greater:**
+
+- Per Occurrence: $1,000,000
+- Personal Injury/Advertising Injury: $1,000,000
+- Products/Completed Operations Aggregate: $2,000,000
+- General Aggregate (other than Products/Completed Operations): $2,000,000
+
+---
+
+## ADDITIONAL INSUREDS:
+
+**From Page 2 of Contract:**
+"Coverage must include a Waiver of Subrogation endorsement in favor of the **Additional Insureds**"
+
+**Identified Additional Insureds:**
+1. CORE Construction Services of Illinois, Inc. (Contractor)
+2. The Board of Trustees of Western Illinois University (Owner)
+
+---
+
+## KEY NOTES:
+
+- Third-party vendor JONES is used to track certificates via compliancechagisb.com
+- Email from compliancechagisb.com will include link to upload COI
+- Additional communications will come from this email for expiration notices, deficiencies, "Gaps" in coverage, and compliance notifications
