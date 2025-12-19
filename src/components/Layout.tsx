@@ -94,8 +94,9 @@ export default function Layout({ children }: LayoutProps) {
               <LogOut className="h-4 w-4" />
               Log Out
             </Button>
-            <div className="text-xs text-sidebar-foreground/50 font-mono px-3">
-              v1.0.0 • Internal Use Only
+            <div className="text-xs text-sidebar-foreground/50 font-mono px-3 space-y-1">
+              <div>v1.0.0 • Internal Use Only</div>
+              <div>© {new Date().getFullYear()} Moon River Academy</div>
             </div>
           </div>
         </div>
