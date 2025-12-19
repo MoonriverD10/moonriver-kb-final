@@ -314,7 +314,10 @@ export default function ProjectManagement() {
             <CardHeader className="border-b bg-muted/10 pb-6">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-primary/10 rounded-full text-primary">
-                  {steps.find(s => s.id === activeStep)?.icon({ className: "h-6 w-6" })}
+                  {(() => {
+                    const Icon = steps.find(s => s.id === activeStep)?.icon;
+                    return Icon ? <Icon className="h-6 w-6" /> : null;
+                  })()}
                 </div>
                 <CardTitle className="text-2xl">
                   {steps.find(s => s.id === activeStep)?.title}
