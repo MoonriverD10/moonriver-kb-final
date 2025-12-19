@@ -29,7 +29,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: "Home", path: "/", icon: LayoutDashboard },
     { name: "Examples", path: "/examples", icon: FileText },
     { name: "Financial", path: "/examples?category=Financial", icon: Calculator },
-    { name: "Project Mgmt", path: "/examples?category=Project%20Management", icon: CheckSquare },
+    { name: "Project Mgmt", path: "/project-management", icon: CheckSquare },
     { name: "Estimating", path: "/examples?category=Estimating", icon: FileText },
     { name: "Insurance", path: "/examples?category=Insurance", icon: ShieldCheck },
     { name: "Closeout", path: "/examples?category=Closeout", icon: CheckSquare },
