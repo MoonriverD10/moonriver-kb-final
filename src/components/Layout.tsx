@@ -9,10 +9,12 @@ import {
   CheckSquare, 
   Menu,
   X,
-  Search
+  Search,
+  LogOut
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,6 +23,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const [location] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { logout } = useAuth();
 
   const navItems = [
     { name: "Dashboard", path: "/", icon: LayoutDashboard },
@@ -80,8 +83,16 @@ export default function Layout({ children }: LayoutProps) {
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-sidebar-border bg-sidebar/50">
-            <div className="text-xs text-sidebar-foreground/50 font-mono">
+          <div className="p-4 border-t border-sidebar-border bg-sidebar/50 space-y-4">
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start gap-3 text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground px-3"
+              onClick={logout}
+            >
+              <LogOut className="h-4 w-4" />
+              Log Out
+            </Button>
+            <div className="text-xs text-sidebar-foreground/50 font-mono px-3">
               v1.0.0 • Internal Use Only
             </div>
           </div>
