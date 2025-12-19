@@ -1,113 +1,172 @@
-import { useState } from "react";
 import Layout from "@/components/Layout";
-import DocumentCard from "@/components/DocumentCard";
-import { documents, categories } from "@/lib/data";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { 
+  GraduationCap, 
+  BookOpen, 
+  Calculator, 
+  CheckSquare, 
+  FileText, 
+  ShieldCheck,
+  ArrowRight,
+  Users,
+  Lightbulb
+} from "lucide-react";
+import { Link } from "wouter";
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const filteredDocs = documents.filter(doc => {
-    const matchesSearch = doc.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          doc.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          doc.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    
-    const matchesCategory = selectedCategory === "All" || doc.category === selectedCategory;
-    
-    return matchesSearch && matchesCategory;
-  });
-
-  // Group stats
-  const stats = [
-    { label: "Total Documents", value: documents.length },
-    { label: "Templates", value: documents.filter(d => d.type === "template").length },
-    { label: "Examples", value: documents.filter(d => d.type === "example").length },
+  const departments = [
+    {
+      title: "Estimating",
+      description: "Learn how to scope projects, calculate costs, and prepare winning bids.",
+      icon: FileText,
+      href: "/examples?category=Estimating",
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+      borderColor: "border-blue-100"
+    },
+    {
+      title: "Project Management",
+      description: "Master the workflows for scheduling, coordination, and execution.",
+      icon: CheckSquare,
+      href: "/examples?category=Project%20Management",
+      color: "text-emerald-600",
+      bgColor: "bg-emerald-50",
+      borderColor: "border-emerald-100"
+    },
+    {
+      title: "Financial",
+      description: "Understand billing, pay apps, and financial reporting standards.",
+      icon: Calculator,
+      href: "/examples?category=Financial",
+      color: "text-violet-600",
+      bgColor: "bg-violet-50",
+      borderColor: "border-violet-100"
+    },
+    {
+      title: "Insurance & Compliance",
+      description: "Navigate COIs, lien waivers, and safety requirements.",
+      icon: ShieldCheck,
+      href: "/examples?category=Insurance",
+      color: "text-amber-600",
+      bgColor: "bg-amber-50",
+      borderColor: "border-amber-100"
+    }
   ];
 
   return (
     <Layout>
-      <div className="space-y-8 animate-in fade-in duration-500">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border pb-6">
-          <div className="space-y-2">
-            <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground tracking-tight">
-              Knowledge Base
-            </h1>
-            <p className="text-muted-foreground max-w-2xl text-lg">
-              Centralized templates, examples, and guides for Moon River Sign Company operations.
-            </p>
-          </div>
-          
-          <div className="flex gap-4 md:border-l md:border-border md:pl-6">
-            {stats.map((stat, i) => (
-              <div key={i} className="space-y-0.5">
-                <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider">{stat.label}</div>
-                <div className="text-2xl font-bold font-heading text-primary">{stat.value}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Search & Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-4 items-center sticky top-0 z-20 bg-background/95 backdrop-blur py-4 -mx-4 px-4 md:mx-0 md:px-0 border-b border-border/50 md:border-none md:static md:bg-transparent md:backdrop-blur-none md:py-0">
-          <div className="relative flex-1 w-full">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search documents, tags, or descriptions..." 
-              className="pl-10 h-12 bg-card border-border focus-visible:ring-primary/20 text-base"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-          
-          <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 no-scrollbar">
-            {categories.map(category => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all border",
-                  selectedCategory === category
-                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                    : "bg-card text-muted-foreground border-border hover:border-primary/50 hover:text-foreground"
-                )}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Content Grid */}
-        {filteredDocs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredDocs.map((doc) => (
-              <DocumentCard key={doc.id} doc={doc} />
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-20 text-center border border-dashed border-border rounded-lg bg-muted/30">
-            <div className="p-4 rounded-full bg-muted mb-4">
-              <Search className="h-8 w-8 text-muted-foreground" />
+      <div className="space-y-10 animate-in fade-in duration-500">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-8 md:p-12 lg:p-16">
+          <div className="relative z-10 max-w-3xl space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-foreground/10 text-primary-foreground/90 text-sm font-medium backdrop-blur-sm border border-primary-foreground/20">
+              <GraduationCap className="h-4 w-4" />
+              <span>Moon River Academy</span>
             </div>
-            <h3 className="text-lg font-semibold text-foreground">No documents found</h3>
-            <p className="text-muted-foreground max-w-sm mt-2">
-              We couldn't find any documents matching "{searchQuery}" in the {selectedCategory} category.
+            
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              Master the Art of <br/>Signage Operations
+            </h1>
+            
+            <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl leading-relaxed">
+              Welcome to your central training hub. Access standard operating procedures, 
+              study real-world examples, and learn the Moon River way of doing business.
             </p>
-            <Button 
-              variant="link" 
-              className="mt-4 text-primary"
-              onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}
-            >
-              Clear all filters
-            </Button>
+            
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Link href="/examples">
+                <Button size="lg" variant="secondary" className="font-semibold gap-2 h-12 px-6">
+                  <BookOpen className="h-5 w-5" />
+                  Browse Training Library
+                </Button>
+              </Link>
+              <Link href="/examples?type=template">
+                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground font-semibold gap-2 h-12 px-6">
+                  <FileText className="h-5 w-5" />
+                  View Templates
+                </Button>
+              </Link>
+            </div>
           </div>
-        )}
+          
+          {/* Abstract Background Pattern */}
+          <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+            <svg className="absolute right-0 top-0 h-full w-1/2 text-white" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M0 0 L100 0 L100 100 L50 100 Z" fill="currentColor" />
+            </svg>
+          </div>
+        </section>
+
+        {/* Learning Tracks */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-heading font-bold flex items-center gap-2">
+              <Lightbulb className="h-6 w-6 text-yellow-500" />
+              Learning Tracks
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {departments.map((dept) => (
+              <Link key={dept.title} href={dept.href}>
+                <a className="block h-full group">
+                  <Card className={`h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-2 ${dept.borderColor} bg-card`}>
+                    <CardHeader>
+                      <div className={`w-12 h-12 rounded-xl ${dept.bgColor} ${dept.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <dept.icon className="h-6 w-6" />
+                      </div>
+                      <CardTitle className="font-heading text-xl">{dept.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-base mb-4">
+                        {dept.description}
+                      </CardDescription>
+                      <div className={`flex items-center text-sm font-medium ${dept.color} opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0 duration-300`}>
+                        Start Learning <ArrowRight className="ml-1 h-4 w-4" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </a>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Quick Resources */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="md:col-span-2 bg-slate-900 text-slate-50 border-none">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                New Employee Onboarding
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-slate-300 mb-6">
+                Just joined the team? Start here to understand our core values, 
+                communication standards, and basic operational tools.
+              </p>
+              <Button variant="secondary" className="w-full sm:w-auto">
+                Start Onboarding Module
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-primary/5 border-primary/20">
+            <CardHeader>
+              <CardTitle className="text-primary">Need Help?</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-sm mb-4">
+                Can't find what you're looking for? Contact the training coordinator.
+              </p>
+              <Button variant="outline" className="w-full border-primary/20 hover:bg-primary/10 text-primary">
+                Contact Support
+              </Button>
+            </CardContent>
+          </Card>
+        </section>
       </div>
     </Layout>
   );

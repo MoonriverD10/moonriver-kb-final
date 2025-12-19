@@ -75,18 +75,7 @@ export const documents: Document[] = [
     icon: FilePen,
     path: "/documents/Template ChangeOrder_Proposal.pdf"
   },
-  {
-    id: "gemini-pricing",
-    title: "Gemini FY25 Pricing Guide",
-    description: "Complete pricing guide for Gemini products (plaques, letters) for estimating.",
-    category: "Estimating",
-    type: "guide",
-    fileType: "xlsx",
-    lastUpdated: "Dec 13, 2025",
-    tags: ["pricing", "gemini", "estimating", "catalog"],
-    icon: FileText,
-    path: "/documents/Gemini FY25_US_COMPLETE_PRICING_GUIDE_R1.xlsx"
-  },
+
   {
     id: "closeout-maintenance",
     title: "Closeout: Maintenance & Warranty",

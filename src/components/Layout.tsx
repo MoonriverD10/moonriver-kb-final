@@ -26,12 +26,13 @@ export default function Layout({ children }: LayoutProps) {
   const { logout } = useAuth();
 
   const navItems = [
-    { name: "Dashboard", path: "/", icon: LayoutDashboard },
-    { name: "Financial", path: "/financial", icon: Calculator },
-    { name: "Project Mgmt", path: "/project-mgmt", icon: CheckSquare },
-    { name: "Estimating", path: "/estimating", icon: FileText },
-    { name: "Insurance", path: "/insurance", icon: ShieldCheck },
-    { name: "Closeout", path: "/closeout", icon: CheckSquare },
+    { name: "Home", path: "/", icon: LayoutDashboard },
+    { name: "Examples", path: "/examples", icon: FileText },
+    { name: "Financial", path: "/examples?category=Financial", icon: Calculator },
+    { name: "Project Mgmt", path: "/examples?category=Project%20Management", icon: CheckSquare },
+    { name: "Estimating", path: "/examples?category=Estimating", icon: FileText },
+    { name: "Insurance", path: "/examples?category=Insurance", icon: ShieldCheck },
+    { name: "Closeout", path: "/examples?category=Closeout", icon: CheckSquare },
   ];
 
   return (

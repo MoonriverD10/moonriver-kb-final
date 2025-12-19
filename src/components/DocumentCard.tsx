@@ -1,5 +1,5 @@
 import { Document } from "@/lib/data";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Download, Eye, FileText } from "lucide-react";
@@ -32,51 +32,87 @@ export default function DocumentCard({ doc }: DocumentCardProps) {
   };
 
   const viewUrl = getViewUrl();
+  
+  // Generate preview image path based on filename
+  // Assuming the conversion script created .jpg files in /documents/previews/ with same basename
+  const getPreviewPath = () => {
+    if (!doc.path || doc.path === "#") return null;
+    const filename = doc.path.split('/').pop();
+    if (!filename) return null;
+    
+    // Handle the specific infographic case which is already an image
+    if (filename.includes("Infographic")) {
+        return `/documents/previews/${filename.replace(/\.(jpeg|jpg|png)$/i, '.jpg')}`;
+    }
+    
+    const basename = filename.substring(0, filename.lastIndexOf('.'));
+    return `/documents/previews/${basename}.jpg`;
+  };
+
+  const previewPath = getPreviewPath();
 
   return (
-    <Card className="group hover:shadow-md transition-all duration-300 border-border bg-card overflow-hidden flex flex-col h-full">
-      <CardHeader className="p-0">
-        <div className="h-2 w-full bg-muted group-hover:bg-primary transition-colors duration-300" />
-      </CardHeader>
-      
-      <CardContent className="p-5 flex-1 flex flex-col gap-4">
-        <div className="flex items-start justify-between">
-          <div className="p-2.5 rounded-lg bg-muted/50 text-primary group-hover:bg-primary/10 transition-colors">
-            <Icon className="h-6 w-6" />
+    <Card className="group hover:shadow-lg transition-all duration-300 border-border bg-card overflow-hidden flex flex-col h-full">
+      {/* Preview Image Area */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted border-b border-border">
+        {previewPath ? (
+          <img 
+            src={previewPath} 
+            alt={`Preview of ${doc.title}`}
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              // Fallback if image fails to load
+              e.currentTarget.style.display = 'none';
+              e.currentTarget.parentElement?.classList.add('flex', 'items-center', 'justify-center');
+            }}
+          />
+        ) : null}
+        
+        {/* Overlay with Icon fallback if image missing or loading */}
+        <div className={cn(
+          "absolute inset-0 flex items-center justify-center bg-muted/50 backdrop-blur-sm transition-opacity duration-300",
+          previewPath ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+        )}>
+          <div className="p-4 rounded-full bg-background/80 shadow-sm">
+            <Icon className="h-8 w-8 text-primary" />
           </div>
-          <Badge variant="outline" className="font-mono text-xs uppercase tracking-wider text-muted-foreground border-border">
-            {doc.fileType}
-          </Badge>
         </div>
 
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Badge 
-              variant="secondary" 
-              className={cn(
-                "text-[10px] px-1.5 py-0 h-5 font-medium",
-                doc.type === "template" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" :
-                doc.type === "example" ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300" :
-                "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300"
-              )}
-            >
-              {doc.type}
-            </Badge>
-            <span className="text-xs text-muted-foreground font-mono">{doc.lastUpdated}</span>
+        {/* Type Badge Overlay */}
+        <div className="absolute top-3 right-3">
+          <Badge 
+            variant="secondary" 
+            className={cn(
+              "shadow-sm backdrop-blur-md border-white/20",
+              doc.type === "template" ? "bg-blue-500/90 text-white" :
+              doc.type === "example" ? "bg-green-500/90 text-white" :
+              "bg-orange-500/90 text-white"
+            )}
+          >
+            {doc.type}
+          </Badge>
+        </div>
+      </div>
+      
+      <CardContent className="p-5 flex-1 flex flex-col gap-3">
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
+            <span className="font-mono uppercase">{doc.category}</span>
+            <span className="font-mono">{doc.fileType.toUpperCase()}</span>
           </div>
           
-          <h3 className="font-heading font-semibold text-lg leading-tight text-foreground group-hover:text-primary transition-colors">
+          <h3 className="font-heading font-semibold text-lg leading-tight text-foreground group-hover:text-primary transition-colors line-clamp-2">
             {doc.title}
           </h3>
           
-          <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
             {doc.description}
           </p>
         </div>
 
         <div className="mt-auto pt-2 flex flex-wrap gap-1.5">
           {doc.tags.slice(0, 3).map(tag => (
-            <span key={tag} className="text-[10px] px-2 py-1 rounded-full bg-muted text-muted-foreground font-medium">
+            <span key={tag} className="text-[10px] px-2 py-1 rounded-full bg-muted text-muted-foreground font-medium border border-border">
               #{tag}
             </span>
           ))}
@@ -85,7 +121,7 @@ export default function DocumentCard({ doc }: DocumentCardProps) {
 
       <CardFooter className="p-4 pt-0 flex gap-2">
         <Button 
-          className="flex-1 gap-2 font-medium" 
+          className="flex-1 gap-2 font-medium shadow-sm" 
           size="sm"
           asChild
           disabled={!doc.path || doc.path === "#"}

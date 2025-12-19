@@ -8,12 +8,14 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import Examples from "./pages/Examples";
 
 function Router() {
   return (
     <Switch>
       <Route path="/login" component={Login} />
       <ProtectedRoute path="/" component={Home} />
+      <ProtectedRoute path="/examples" component={Examples} />
       <ProtectedRoute path="/financial" component={Home} />
       <ProtectedRoute path="/project-management" component={Home} />
       <ProtectedRoute path="/estimating" component={Home} />
