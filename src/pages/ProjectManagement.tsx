@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import projectManagementInfographic from "@/assets/project-management-infographic-cropped-v3.png";
+import projectManagementInfographic from "@/assets/project-management-infographic-padded.png";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare, Play, Pause, Maximize2, X, ChevronLeft, ChevronRight, Presentation, Network, BrainCircuit } from "lucide-react";
