@@ -60,8 +60,8 @@ const BlueprintSlideshow = () => {
   // Format slide number to match filename (slide-01.png, slide-02.png, etc.)
   const getSlidePath = (index: number) => {
     const slideNum = (index + 1).toString().padStart(2, '0');
-    // Ensure the path is absolute from the public root
-    return `/images/blueprint/slide-${slideNum}.png`;
+    // Updated path: images are now directly in /images/
+    return `/images/slide-${slideNum}.png`;
   };
 
   return (
