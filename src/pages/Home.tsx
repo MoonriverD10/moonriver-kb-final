@@ -75,14 +75,14 @@ export default function Home() {
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4">
-              <Link href="/examples">
-                <Button size="lg" variant="secondary" className="font-semibold gap-2 h-12 px-6">
+              <Link href="/examples" className="inline-flex">
+                <Button size="lg" variant="secondary" className="font-semibold gap-2 h-12 px-6 w-full">
                   <BookOpen className="h-5 w-5" />
                   Browse Training Library
                 </Button>
               </Link>
-              <Link href="/examples?type=template">
-                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground font-semibold gap-2 h-12 px-6">
+              <Link href="/examples?type=template" className="inline-flex">
+                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary/10 hover:text-primary-foreground font-semibold gap-2 h-12 px-6 w-full">
                   <FileText className="h-5 w-5" />
                   View Templates
                 </Button>
@@ -109,8 +109,7 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {departments.map((dept) => (
-              <Link key={dept.title} href={dept.href}>
-                <a className="block h-full group">
+              <Link key={dept.title} href={dept.href} className="block h-full group">
                   <Card className={`h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-2 ${dept.borderColor} bg-card`}>
                     <CardHeader>
                       <div className={`w-12 h-12 rounded-xl ${dept.bgColor} ${dept.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
@@ -127,7 +126,6 @@ export default function Home() {
                       </div>
                     </CardContent>
                   </Card>
-                </a>
               </Link>
             ))}
           </div>

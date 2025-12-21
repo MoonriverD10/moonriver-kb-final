@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,6 +13,11 @@ export default function ProjectManagement() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [currentSlide]);
 
   // Slideshow logic
   const totalSlides = 11;
@@ -272,11 +277,22 @@ export default function ProjectManagement() {
 
   return (
     <div className="container mx-auto py-12 px-4 max-w-7xl">
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">Project Management Hub</h1>
-        <p className="text-xl text-muted-foreground max-w-3xl">
-          Your interactive guide to the Moon River Sign Company project lifecycle. Master the workflow from contract award to final closeout.
-        </p>
+      <div className="mb-12 space-y-8">
+        <div>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Project Management Hub</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
+            Your interactive guide to the Moon River Sign Company project lifecycle. Master the workflow from contract award to final closeout.
+          </p>
+        </div>
+
+        {/* 5-Stage Isometric Infographic */}
+        <div className="w-full bg-white rounded-xl shadow-sm border p-2 overflow-hidden">
+          <img 
+            src="/images/project-management-infographic.png" 
+            alt="Project Management Workflow: Contract -> Design -> Production -> Installation -> Closeout" 
+            className="w-full h-auto object-cover rounded-lg"
+          />
+        </div>
       </div>
 
       <Tabs defaultValue="sop" className="w-full">
@@ -418,15 +434,19 @@ export default function ProjectManagement() {
 
               {/* Main Slide Image */}
               <div className="absolute inset-0 flex items-center justify-center bg-neutral-900">
-                <img 
-                  src={`/images/slide-${String(currentSlide + 1).padStart(2, '0')}.png`}
-                  alt={`Slide ${currentSlide + 1}`}
-                  className="max-h-full max-w-full object-contain"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement!.innerHTML = `<div class="text-white/50 flex flex-col items-center"><p class="text-4xl font-bold mb-4">Image Not Found</p><p>slide-${String(currentSlide + 1).padStart(2, '0')}.png</p></div>`;
-                  }}
-                />
+                {!imgError ? (
+                  <img 
+                    src={`/images/slide-${String(currentSlide + 1).padStart(2, '0')}.png`}
+                    alt={`Slide ${currentSlide + 1}`}
+                    className="max-h-full max-w-full object-contain"
+                    onError={() => setImgError(true)}
+                  />
+                ) : (
+                  <div className="text-white/50 flex flex-col items-center">
+                    <p className="text-4xl font-bold mb-4">Image Not Found</p>
+                    <p>slide-{String(currentSlide + 1).padStart(2, '0')}.png</p>
+                  </div>
+                )}
               </div>
 
               {/* Controls Overlay */}
