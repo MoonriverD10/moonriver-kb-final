@@ -1,187 +1,286 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, PenTool, Factory, HardHat, ClipboardCheck, CheckCircle2, ChevronRight, Download, BookOpen, Copy, ThumbsUp, ThumbsDown, ChevronLeft, Maximize2, X, Play, Pause, Presentation } from "lucide-react";
-import sopContentFull from "@/data/sopContentFull.json";
-import ReactMarkdown from 'react-markdown';
-import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare, Play, Pause, Maximize2, X, ChevronLeft, ChevronRight, Presentation, Network, BrainCircuit } from "lucide-react";
+import { MindMap } from "@/components/MindMap";
+import { Flashcards } from "@/components/Flashcards";
 
-// Blueprint Slideshow Component
-const BlueprintSlideshow = () => {
+export default function ProjectManagement() {
+  const [activeStep, setActiveStep] = useState("step1");
+  const [isPlaying, setIsPlaying] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const totalSlides = 11; // Based on the file listing we saw
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const SLIDE_DURATION = 5000; // 5 seconds per slide
 
+  // Slideshow logic
+  const totalSlides = 11;
+  const slideDuration = 5000; // 5 seconds per slide
+
+  // Auto-play effect
+  useState(() => {
+    let interval: NodeJS.Timeout;
+    if (isPlaying) {
+      interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % totalSlides);
+      }, slideDuration);
+    }
+    return () => clearInterval(interval);
+  });
+
+  const togglePlay = () => setIsPlaying(!isPlaying);
+  
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    setIsPlaying(false); // Pause on manual interaction
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    setIsPlaying(false); // Pause on manual interaction
   };
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
   };
 
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  // Auto-play logic
-  useEffect(() => {
-    if (isPlaying) {
-      timerRef.current = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % totalSlides);
-      }, SLIDE_DURATION);
-    } else {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-    }
-
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-    };
-  }, [isPlaying]);
-
-  // Pause on manual interaction
-  const handleManualNavigation = (action: () => void) => {
-    action();
-    setIsPlaying(false); // Stop auto-play if user manually navigates
-  };
-
-  // Format slide number to match filename (slide-01.png, slide-02.png, etc.)
-  const getSlidePath = (index: number) => {
-    const slideNum = (index + 1).toString().padStart(2, '0');
-    // Updated path: images are now directly in /images/
-    return `/images/slide-${slideNum}.png`;
-  };
-
-  return (
-    <div className={`relative group ${isFullscreen ? 'fixed inset-0 z-50 bg-black flex items-center justify-center p-4' : 'w-full aspect-video bg-slate-100 rounded-xl overflow-hidden shadow-lg mb-12'}`}>
-      
-      {/* Main Image */}
-      <div className={`relative ${isFullscreen ? 'h-full w-full flex items-center justify-center' : 'w-full h-full'}`}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={currentSlide}
-            src={getSlidePath(currentSlide)}
-            alt={`Project Blueprint Slide ${currentSlide + 1}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className={`${isFullscreen ? 'max-h-full max-w-full object-contain' : 'w-full h-full object-contain'}`}
-            onError={(e) => {
-              console.error(`Failed to load image: ${getSlidePath(currentSlide)}`);
-              e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found"; // Fallback
-            }}
-          />
-        </AnimatePresence>
-
-        {/* Navigation Overlay */}
-        <div className={`absolute inset-0 flex items-center justify-between p-4 transition-opacity duration-300 ${isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-          <button 
-            onClick={(e) => { e.stopPropagation(); handleManualNavigation(prevSlide); }}
-            className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors backdrop-blur-sm"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          
-          {/* Center Play/Pause Button (Large) */}
-          <button 
-            onClick={(e) => { e.stopPropagation(); togglePlay(); }}
-            className="p-4 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all backdrop-blur-sm transform hover:scale-110"
-          >
-            {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 ml-1" />}
-          </button>
-
-          <button 
-            onClick={(e) => { e.stopPropagation(); handleManualNavigation(nextSlide); }}
-            className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors backdrop-blur-sm"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-300 flex justify-between items-end ${isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-          <div className="flex items-center gap-3">
-            <div className="text-white text-sm font-medium px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm">
-              Slide {currentSlide + 1} of {totalSlides}
+  const steps = [
+    {
+      id: "step1",
+      title: "1. Contract & Setup",
+      icon: FileText,
+      description: "Review, Execute, and Initialize",
+      content: (
+        <div className="space-y-6">
+          <div className="prose dark:prose-invert max-w-none">
+            <h3>Chapter 1: Awarded Contract/Purchase Order</h3>
+            <p>
+              Starting a project on a positive note is crucial for success. Thoroughly examine the Contract or Purchase Order immediately upon receipt.
+            </p>
+            
+            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-500 my-4">
+              <h4 className="text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2 mt-0">
+                <AlertCircle className="h-5 w-5" />
+                Critical Review Elements
+              </h4>
+              <ul className="mt-2 space-y-1 text-sm">
+                <li><strong>Contract Amount:</strong> Ensure it matches your original bid exactly.</li>
+                <li><strong>Scope of Work:</strong> Compare listed Signage Work/Scope to your bid.</li>
+                <li><strong>Project Details:</strong> Verify project name, location, and job number.</li>
+                <li><strong>Installation Responsibilities:</strong> Check material, labor, supervision, and equipment needs.</li>
+              </ul>
             </div>
-            {isPlaying && (
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider animate-pulse">
-                <Play className="w-3 h-3 fill-current" /> Auto-Playing
-              </div>
-            )}
+
+            <h3>Chapter 2: Execute Contract</h3>
+            <p>
+              After completing due diligence, sign the contract (including all initials) and email it to the General Contractor's project manager.
+            </p>
+            <p className="italic text-muted-foreground">
+              "A handshake may seal intent, but signatures seal destiny."
+            </p>
+
+            <h3>Chapter 3: Start-up Documents</h3>
+            <div className="grid gap-4 md:grid-cols-2 mt-4">
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">Certificate of Insurance (COI)</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm">
+                  Required with every Contract. Proof of General Liability, Auto, and Workers' Comp coverage.
+                  <br/><br/>
+                  <strong>Pro Tip:</strong> Ensure "stored materials" are covered if you are billing for them before installation.
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">Schedule of Values (SOV)</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm">
+                  A detailed breakdown of your bid. This form enables the G.C. to approve your monthly billing based on percentage of work completed.
+                </CardContent>
+              </Card>
+            </div>
           </div>
-          
-          <button 
-            onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
-            className="p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors backdrop-blur-sm"
-          >
-            {isFullscreen ? <X className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
-          </button>
         </div>
+      )
+    },
+    {
+      id: "step2",
+      title: "2. Design & Approval",
+      icon: PenTool,
+      description: "Submittals, Shop Drawings, and Samples",
+      content: (
+        <div className="space-y-6">
+          <div className="prose dark:prose-invert max-w-none">
+            <h3>The Submittal Process</h3>
+            <p>
+              This is the "Measure Twice, Cut Once" phase. You must obtain formal approval from the Architect and Owner before manufacturing begins.
+            </p>
 
-        {/* Progress Bar (only when playing) */}
-        {isPlaying && (
-          <div className="absolute bottom-0 left-0 h-1 bg-blue-600 z-10 transition-all duration-[5000ms] ease-linear w-full origin-left" 
-               key={currentSlide} // Reset animation on slide change
-               style={{ 
-                 animation: `progress ${SLIDE_DURATION}ms linear`
-               }} 
-          />
-        )}
-      </div>
-      
-      <style>{`
-        @keyframes progress {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-      `}</style>
-    </div>
-  );
-};
+            <div className="grid gap-6 md:grid-cols-3 my-6">
+              <div className="border rounded-lg p-4 text-center hover:bg-accent/50 transition-colors">
+                <div className="font-bold text-lg mb-2">1. Shop Drawings</div>
+                <p className="text-sm text-muted-foreground">Detailed technical drawings showing dimensions, materials, and mounting methods.</p>
+              </div>
+              <div className="border rounded-lg p-4 text-center hover:bg-accent/50 transition-colors">
+                <div className="font-bold text-lg mb-2">2. Material Samples</div>
+                <p className="text-sm text-muted-foreground">Physical samples of paint colors, vinyls, and metals for finish approval.</p>
+              </div>
+              <div className="border rounded-lg p-4 text-center hover:bg-accent/50 transition-colors">
+                <div className="font-bold text-lg mb-2">3. Product Data</div>
+                <p className="text-sm text-muted-foreground">Spec sheets for LEDs, power supplies, and other components.</p>
+              </div>
+            </div>
 
-export default function ProjectManagement() {
-  const [activeStageId, setActiveStageId] = useState(1);
+            <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border-l-4 border-orange-500">
+              <h4 className="text-orange-700 dark:text-orange-300 font-bold mt-0">Managing the Approval Loop</h4>
+              <p className="text-sm mt-2">
+                Expect revisions. When drawings are returned "Revise and Resubmit," prioritize the changes and turn them around quickly to avoid schedule delays. Only proceed to production when you receive a status of <strong>"Approved"</strong> or <strong>"Approved as Noted."</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      id: "step3",
+      title: "3. Production & Delivery",
+      icon: Truck,
+      description: "Fabrication, Quality Control, and Logistics",
+      content: (
+        <div className="space-y-6">
+          <div className="prose dark:prose-invert max-w-none">
+            <h3>Releasing to Production</h3>
+            <p>
+              Once submittals are approved, formally release orders to manufacturers. Confirm production lead times immediately and update the General Contractor.
+            </p>
 
-  const stages = sopContentFull.stages;
-  const activeStage = stages.find(s => s.id === activeStageId) || stages[0];
+            <h3>Logistics & Delivery</h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong>Clear Instructions:</strong> Give the manufacturer the site superintendent's phone number for delivery coordination.</li>
+              <li><strong>Receiving:</strong> Ensure a knowledgeable person is on-site to inspect deliveries. If the G.C. accepts damaged goods without noting it, you may be liable.</li>
+              <li><strong>Direct Shipping:</strong> Whenever possible, ship directly to the job site to minimize handling damages.</li>
+            </ul>
 
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case "FileSignature": return FileText;
-      case "PenTool": return PenTool;
-      case "Factory": return Factory;
-      case "HardHat": return HardHat;
-      case "ClipboardCheck": return ClipboardCheck;
-      default: return FileText;
+            <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg mt-6">
+              <h4 className="font-bold flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
+                Quality Control Checklist
+              </h4>
+              <div className="grid grid-cols-2 gap-2 mt-3 text-sm">
+                <div className="flex items-center gap-2"><input type="checkbox" disabled /> Correct Colors</div>
+                <div className="flex items-center gap-2"><input type="checkbox" disabled /> Correct Dimensions</div>
+                <div className="flex items-center gap-2"><input type="checkbox" disabled /> No Scratches/Dents</div>
+                <div className="flex items-center gap-2"><input type="checkbox" disabled /> All Hardware Included</div>
+                <div className="flex items-center gap-2"><input type="checkbox" disabled /> UL Labels Applied</div>
+                <div className="flex items-center gap-2"><input type="checkbox" disabled /> Templates Included</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      id: "step4",
+      title: "4. Installation",
+      icon: HardHat,
+      description: "Site Prep, Safety, and Execution",
+      content: (
+        <div className="space-y-6">
+          <div className="prose dark:prose-invert max-w-none">
+            <h3>Pre-Installation Coordination</h3>
+            <p>
+              Installation is where the rubber meets the road. Success depends on coordination <em>before</em> the truck leaves the shop.
+            </p>
+
+            <div className="grid gap-4 md:grid-cols-2 my-4">
+              <div className="p-4 border rounded-lg">
+                <h4 className="font-bold mb-2">Site Readiness</h4>
+                <p className="text-sm text-muted-foreground">Confirm with the Superintendent: Is the wall ready? Is the power run? Is the ground level for the lift?</p>
+              </div>
+              <div className="p-4 border rounded-lg">
+                <h4 className="font-bold mb-2">Equipment & Access</h4>
+                <p className="text-sm text-muted-foreground">Determine if you need a crane, boom truck, or scissor lift. Verify site access for heavy equipment.</p>
+              </div>
+            </div>
+
+            <h3>Safety Plan</h3>
+            <p>
+              A comprehensive safety plan adhering to OSHA standards is often required. For signage, this can usually be a simple one-page outline, but it must be on file.
+            </p>
+
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-500 mt-4">
+              <h4 className="text-yellow-700 dark:text-yellow-300 font-bold mt-0">Permits & Licenses</h4>
+              <p className="text-sm mt-2">
+                <strong>Don't get stopped on install day!</strong> Confirm all signage and electrical permits are pulled and posted on site. If the G.C. hasn't pulled them, you must handle it.
+              </p>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      id: "step5",
+      title: "5. Closeout & Payment",
+      icon: ClipboardCheck,
+      description: "Warranties, Retainage, and Final Invoice",
+      content: (
+        <div className="space-y-6">
+          <div className="prose dark:prose-invert max-w-none">
+            <h3>The Finish Line</h3>
+            <p>
+              The job isn't done until the paperwork is submitted and the final check clears.
+            </p>
+
+            <h3>Required Closeout Documents</h3>
+            <ul className="space-y-2 mt-4">
+              <li className="flex items-start gap-3 p-3 bg-card rounded-md border">
+                <FileText className="h-5 w-5 text-primary mt-0.5" />
+                <div>
+                  <strong>As-Built Drawings:</strong>
+                  <p className="text-sm text-muted-foreground">Final drawings showing exactly how the signs were built and installed, noting any field changes.</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3 p-3 bg-card rounded-md border">
+                <ShieldCheck className="h-5 w-5 text-primary mt-0.5" />
+                <div>
+                  <strong>Warranty Documents:</strong>
+                  <p className="text-sm text-muted-foreground">Standard 1-year warranty on labor/materials, plus manufacturer warranties on LEDs/power supplies.</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3 p-3 bg-card rounded-md border">
+                <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
+                <div>
+                  <strong>Maintenance Manual:</strong>
+                  <p className="text-sm text-muted-foreground">Instructions for cleaning and servicing the signage.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div className="mt-6">
+              <h3>Final Payment & Retainage</h3>
+              <p>
+                Submit your final invoice (G702/G703) for the remaining balance, including the 5-10% retainage held throughout the project.
+              </p>
+            </div>
+          </div>
+        </div>
+      )
     }
-  };
+  ];
 
   return (
-    <div className="container mx-auto p-6 max-w-7xl">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Project Management Hub</h1>
-        <p className="text-muted-foreground">
-          Your interactive guide to the Moon River Sign Company project lifecycle.
+    <div className="container mx-auto py-12 px-4 max-w-7xl">
+      <div className="mb-12">
+        <h1 className="text-4xl font-bold tracking-tight mb-4">Project Management Hub</h1>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Your interactive guide to the Moon River Sign Company project lifecycle. Master the workflow from contract award to final closeout.
         </p>
       </div>
 
       <Tabs defaultValue="sop" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-8 max-w-[400px]">
+        <TabsList className="grid w-full grid-cols-4 mb-8 max-w-[800px]">
           <TabsTrigger value="sop" className="flex items-center gap-2">
             <FileText className="w-4 h-4" />
             SOP Manual
@@ -190,196 +289,95 @@ export default function ProjectManagement() {
             <Presentation className="w-4 h-4" />
             Visual Blueprint
           </TabsTrigger>
+          <TabsTrigger value="mindmap" className="flex items-center gap-2">
+            <Network className="w-4 h-4" />
+            Interactive Mind Map
+          </TabsTrigger>
+          <TabsTrigger value="flashcards" className="flex items-center gap-2">
+            <BrainCircuit className="w-4 h-4" />
+            Knowledge Check
+          </TabsTrigger>
         </TabsList>
 
-        {/* TAB 1: SOP MANUAL (Default) */}
+        {/* TAB 1: SOP MANUAL */}
         <TabsContent value="sop" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          
-          {/* Interactive Infographic Navigation */}
-          <div className="relative mb-12">
-            {/* Connecting Line */}
-            <div className="absolute top-1/2 left-0 w-full h-1 bg-muted -z-10 hidden md:block transform -translate-y-1/2" />
-            
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              {stages.map((stage) => {
-                const Icon = getIcon(stage.icon);
-                const isActive = stage.id === activeStageId;
-                
-                return (
-                  <button
-                    key={stage.id}
-                    onClick={() => setActiveStageId(stage.id)}
-                    className={cn(
-                      "flex flex-col items-center p-4 rounded-xl transition-all duration-300 border-2 bg-background relative group",
-                      isActive 
-                        ? "border-primary shadow-lg scale-105 z-10" 
-                        : "border-muted hover:border-primary/50 hover:bg-accent/50"
-                    )}
-                  >
-                    <div className={cn(
-                      "p-3 rounded-full mb-3 transition-colors",
-                      isActive ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:text-primary"
-                    )}>
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <div className="text-center">
-                      <div className={cn("font-bold text-sm mb-1", isActive ? "text-primary" : "text-foreground")}>
-                        {stage.id}. {stage.title}
-                      </div>
-                      <div className="text-xs text-muted-foreground line-clamp-2 hidden md:block">
-                        {stage.summary}
-                      </div>
-                    </div>
-                    
-                    {/* Active Indicator Arrow */}
-                    {isActive && (
-                      <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-primary hidden md:block" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Full-Width Reader View */}
-          <div className="grid lg:grid-cols-4 gap-6">
-            
-            {/* Sidebar Navigation */}
-            <div className="lg:col-span-1 space-y-6">
-              <Card className="sticky top-6">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                    In This Section
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-1">
-                  {activeStage.fullContent.map((chapter, idx) => (
-                    <div key={idx} className="mb-4 last:mb-0">
-                      <div className="font-medium text-sm mb-2 text-foreground flex items-center gap-2">
-                        <BookOpen className="h-3 w-3 text-primary" />
-                        {chapter.chapterTitle.split(':')[0]}
-                      </div>
-                      <ul className="space-y-1 border-l-2 border-muted ml-1.5 pl-3">
-                        {chapter.sections.map((section, sIdx) => (
-                          <li key={sIdx}>
-                            <a 
-                              href={`#section-${idx}-${sIdx}`} 
-                              className="text-xs text-muted-foreground hover:text-primary block py-1 transition-colors line-clamp-1"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                document.getElementById(`section-${idx}-${sIdx}`)?.scrollIntoView({ behavior: 'smooth' });
-                              }}
-                            >
-                              {section.heading.replace(/^Step \d+: /, '')}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                    Downloads
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Button variant="outline" size="sm" className="w-full justify-start gap-2">
-                    <Download className="h-3 w-3" />
-                    Download Full SOP
-                  </Button>
-                  <Button variant="outline" size="sm" className="w-full justify-start gap-2">
-                    <CheckCircle2 className="h-3 w-3" />
-                    Stage Checklist
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Main Content Area */}
-            <div className="lg:col-span-3">
-              <Card className="border-none shadow-none bg-transparent">
-                <CardContent className="p-0 space-y-8">
-                  
-                  {/* Header Block */}
-                  <div className="flex items-start gap-4 p-6 bg-card rounded-xl border shadow-sm">
-                    <div className="p-3 bg-primary/10 rounded-full shrink-0">
-                      {(() => {
-                        const Icon = getIcon(activeStage.icon);
-                        return <Icon className="h-6 w-6 text-primary" />;
-                      })()}
-                    </div>
-                    <div className="space-y-1">
-                      <h2 className="text-2xl font-bold tracking-tight">{activeStage.title}</h2>
-                      <p className="text-muted-foreground text-lg leading-relaxed">
-                        {activeStage.summary}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Content Blocks */}
-                  {activeStage.fullContent.map((chapter, idx) => (
-                    <div key={idx} className="space-y-6">
-                      {/* Chapter Divider */}
-                      <div className="flex items-center gap-4 py-4">
-                        <div className="h-px bg-border flex-1" />
-                        <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
-                          {chapter.chapterTitle}
-                        </span>
-                        <div className="h-px bg-border flex-1" />
-                      </div>
-
-                      {chapter.sections.map((section, sIdx) => (
-                        <div 
-                          key={sIdx} 
-                          id={`section-${idx}-${sIdx}`} 
-                          className="group relative bg-card rounded-xl border shadow-sm p-8 md:p-10 scroll-mt-24 transition-all hover:shadow-md"
-                        >
-                          <div className="space-y-6">
-                            <h3 className="text-xl font-bold tracking-tight text-foreground">
-                              {section.heading}
-                            </h3>
-                            
-                            <div className="prose prose-slate dark:prose-invert max-w-none 
-                              prose-headings:font-semibold prose-headings:tracking-tight
-                              prose-p:leading-8 prose-p:text-[1.05rem] prose-p:text-slate-600 dark:prose-p:text-slate-300
-                              prose-li:text-slate-600 dark:prose-li:text-slate-300 prose-li:marker:text-primary/70
-                              prose-strong:text-foreground prose-strong:font-bold
-                              prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:bg-slate-50 dark:prose-blockquote:bg-slate-900/50 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-slate-700 dark:prose-blockquote:text-slate-300
-                            ">
-                              <ReactMarkdown>{section.body}</ReactMarkdown>
+          <div className="grid lg:grid-cols-12 gap-8">
+            {/* Left Column: Navigation */}
+            <div className="lg:col-span-4 space-y-4">
+              <div className="sticky top-6">
+                <h2 className="text-lg font-semibold mb-4 px-2">Project Stages</h2>
+                <div className="space-y-3">
+                  {steps.map((step) => {
+                    const Icon = step.icon;
+                    const isActive = activeStep === step.id;
+                    return (
+                      <button
+                        key={step.id}
+                        onClick={() => setActiveStep(step.id)}
+                        className={cn(
+                          "w-full text-left p-4 rounded-xl border transition-all duration-200 group relative overflow-hidden",
+                          isActive 
+                            ? "bg-primary text-primary-foreground border-primary shadow-lg scale-[1.02]" 
+                            : "bg-card hover:bg-accent hover:border-primary/50"
+                        )}
+                      >
+                        <div className="flex items-start gap-4 relative z-10">
+                          <div className={cn(
+                            "p-2 rounded-lg transition-colors",
+                            isActive ? "bg-primary-foreground/20" : "bg-muted group-hover:bg-background"
+                          )}>
+                            <Icon className="w-6 h-6" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-sm uppercase tracking-wide opacity-90 mb-1">
+                              {step.title}
+                            </div>
+                            <div className={cn(
+                              "text-xs",
+                              isActive ? "text-primary-foreground/80" : "text-muted-foreground"
+                            )}>
+                              {step.description}
                             </div>
                           </div>
-
-                          {/* Interaction Bar (Subtle) */}
-                          <div className="flex items-center gap-2 mt-8 pt-4 border-t opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
-                              <Copy className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
-                              <ThumbsUp className="h-4 w-4" />
-                            </Button>
-                          </div>
                         </div>
-                      ))}
-                    </div>
-                  ))}
+                        
+                        {/* Active Indicator Arrow */}
+                        {isActive && (
+                          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-4 h-4 bg-primary"></div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
 
-                  {/* End of Section */}
-                  <div className="flex flex-col items-center justify-center py-12 text-muted-foreground space-y-4">
-                    <div className="h-12 w-1 bg-gradient-to-b from-border to-transparent" />
-                    <Button variant="outline" className="gap-2" onClick={() => {
-                      const nextId = activeStageId < 5 ? activeStageId + 1 : 1;
-                      setActiveStageId(nextId);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}>
-                      Continue to Next Stage <ChevronRight className="h-4 w-4" />
-                    </Button>
+            {/* Right Column: Content */}
+            <div className="lg:col-span-8">
+              <Card className="min-h-[600px] shadow-xl border-muted">
+                <CardHeader className="border-b bg-muted/30 pb-6">
+                  <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                    In This Section
                   </div>
-
+                  <CardTitle className="text-3xl flex items-center gap-3">
+                    {steps.find(s => s.id === activeStep)?.icon && (
+                      <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                        {(() => {
+                          const Icon = steps.find(s => s.id === activeStep)!.icon;
+                          return <Icon className="w-8 h-8" />;
+                        })()}
+                      </div>
+                    )}
+                    {steps.find(s => s.id === activeStep)?.title.split(". ")[1]}
+                  </CardTitle>
+                  <CardDescription className="text-lg mt-2">
+                    {steps.find(s => s.id === activeStep)?.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-8">
+                  <ScrollArea className="h-[600px] pr-6">
+                    {steps.find(s => s.id === activeStep)?.content}
+                  </ScrollArea>
                 </CardContent>
               </Card>
             </div>
@@ -388,11 +386,11 @@ export default function ProjectManagement() {
 
         {/* TAB 2: VISUAL BLUEPRINT */}
         <TabsContent value="blueprint" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="mb-16">
+          <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                  <BookOpen className="w-6 h-6 text-primary" />
+                  <Presentation className="w-6 h-6 text-primary" />
                   The Project Blueprint
                 </h2>
                 <p className="text-muted-foreground mt-1">
@@ -400,8 +398,117 @@ export default function ProjectManagement() {
                 </p>
               </div>
             </div>
+
+            {/* Slideshow Container */}
+            <div className={cn(
+              "relative bg-black rounded-xl overflow-hidden shadow-2xl transition-all duration-500",
+              isFullscreen ? "fixed inset-0 z-50 rounded-none" : "aspect-video w-full max-w-5xl mx-auto"
+            )}>
+              {/* Close Fullscreen Button */}
+              {isFullscreen && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 z-50 text-white hover:bg-white/20"
+                  onClick={toggleFullscreen}
+                >
+                  <X className="w-8 h-8" />
+                </Button>
+              )}
+
+              {/* Main Slide Image */}
+              <div className="absolute inset-0 flex items-center justify-center bg-neutral-900">
+                <img 
+                  src={`/images/slide-${String(currentSlide + 1).padStart(2, '0')}.png`}
+                  alt={`Slide ${currentSlide + 1}`}
+                  className="max-h-full max-w-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.parentElement!.innerHTML = `<div class="text-white/50 flex flex-col items-center"><p class="text-4xl font-bold mb-4">Image Not Found</p><p>slide-${String(currentSlide + 1).padStart(2, '0')}.png</p></div>`;
+                  }}
+                />
+              </div>
+
+              {/* Controls Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-between">
+                
+                {/* Left Controls */}
+                <div className="flex items-center gap-4">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="text-white hover:bg-white/20"
+                    onClick={togglePlay}
+                  >
+                    {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+                  </Button>
+                  
+                  <div className="text-white/90 font-medium font-mono">
+                    {currentSlide + 1} / {totalSlides}
+                  </div>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="flex-1 mx-6 h-1.5 bg-white/20 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-primary transition-all duration-300 ease-linear"
+                    style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
+                  />
+                </div>
+
+                {/* Right Controls */}
+                <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/20" onClick={prevSlide}>
+                    <ChevronLeft className="w-6 h-6" />
+                  </Button>
+                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/20" onClick={nextSlide}>
+                    <ChevronRight className="w-6 h-6" />
+                  </Button>
+                  <div className="w-px h-6 bg-white/20 mx-2" />
+                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/20" onClick={toggleFullscreen}>
+                    <Maximize2 className="w-5 h-5" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+
+        {/* TAB 3: INTERACTIVE MIND MAP */}
+        <TabsContent value="mindmap" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                  <Network className="w-6 h-6 text-primary" />
+                  Process Mind Map
+                </h2>
+                <p className="text-muted-foreground mt-1">
+                  Explore the connections between different project stages. Drag to pan, scroll to zoom, and click nodes for details.
+                </p>
+              </div>
+            </div>
             
-            <BlueprintSlideshow />
+            <MindMap />
+          </div>
+        </TabsContent>
+
+        {/* TAB 4: FLASHCARDS */}
+        <TabsContent value="flashcards" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                  <BrainCircuit className="w-6 h-6 text-primary" />
+                  Workflow Flashcards
+                </h2>
+                <p className="text-muted-foreground mt-1">
+                  Test your knowledge of the D10 SOP. Click cards to flip and reveal the answer.
+                </p>
+              </div>
+            </div>
+            
+            <Flashcards />
           </div>
         </TabsContent>
       </Tabs>
