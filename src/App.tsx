@@ -10,6 +10,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Examples from "./pages/Examples";
 import ProjectManagement from "./pages/ProjectManagement";
+import Estimating from "./pages/Estimating";
 
 function Router() {
   return (
@@ -19,7 +20,7 @@ function Router() {
       <ProtectedRoute path="/examples" component={Examples} />
       <ProtectedRoute path="/financial" component={Home} />
       <ProtectedRoute path="/project-management" component={ProjectManagement} />
-      <ProtectedRoute path="/estimating" component={Home} />
+      <ProtectedRoute path="/estimating" component={Estimating} />
       <ProtectedRoute path="/closeout" component={Home} />
       <ProtectedRoute path="/insurance" component={Home} />
       <Route path="/404" component={NotFound} />
