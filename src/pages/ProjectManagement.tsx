@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import projectManagementInfographic from "@/assets/project-management-infographic-cropped.png";
+import projectManagementInfographic from "@/assets/project-management-infographic-cropped-v2.png";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare, Play, Pause, Maximize2, X, ChevronLeft, ChevronRight, Presentation, Network, BrainCircuit } from "lucide-react";
@@ -293,9 +293,13 @@ export default function ProjectManagement() {
             alt="Project Management Workflow: Contract -> Design -> Production -> Installation -> Closeout" 
             className="w-full h-auto object-cover rounded-lg"
           />
+        </div>
+        
+        {/* Scroll Indicator - Moved outside image container */}
+        <div className="flex justify-center -mt-6 relative z-10">
           <div 
             onClick={() => document.getElementById('project-stages-content')?.scrollIntoView({ behavior: 'smooth' })}
-            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:bg-white transition-colors"
+            className="animate-bounce bg-white border shadow-md px-6 py-2 rounded-full text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:bg-gray-50 transition-colors"
           >
             <ChevronRight className="w-4 h-4 rotate-90" />
             Scroll for Details
