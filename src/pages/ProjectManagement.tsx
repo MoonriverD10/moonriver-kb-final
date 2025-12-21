@@ -293,14 +293,17 @@ export default function ProjectManagement() {
             alt="Project Management Workflow: Contract -> Design -> Production -> Installation -> Closeout" 
             className="w-full h-auto object-cover rounded-lg"
           />
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg text-sm font-medium text-primary flex items-center gap-2">
+          <div 
+            onClick={() => document.getElementById('project-stages-content')?.scrollIntoView({ behavior: 'smooth' })}
+            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:bg-white transition-colors"
+          >
             <ChevronRight className="w-4 h-4 rotate-90" />
             Scroll for Details
           </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mb-4 text-muted-foreground">
+      <div id="project-stages-content" className="flex items-center gap-2 mb-4 text-muted-foreground pt-4">
         <div className="h-px bg-border flex-1"></div>
         <span className="text-sm font-medium uppercase tracking-wider">Detailed Workflow Below</span>
         <div className="h-px bg-border flex-1"></div>
