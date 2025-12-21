@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, PenTool, Factory, HardHat, ClipboardCheck, CheckCircle2, ChevronRight, Download, BookOpen, Copy, ThumbsUp, ThumbsDown, ChevronLeft, Maximize2, X } from "lucide-react";
+import { FileText, PenTool, Factory, HardHat, ClipboardCheck, CheckCircle2, ChevronRight, Download, BookOpen, Copy, ThumbsUp, ThumbsDown, ChevronLeft, Maximize2, X, Play, Pause } from "lucide-react";
 import sopContentFull from "@/data/sopContentFull.json";
 import ReactMarkdown from 'react-markdown';
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +11,10 @@ import { motion, AnimatePresence } from "framer-motion";
 const BlueprintSlideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const totalSlides = 11; // Based on the file listing we saw
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const SLIDE_DURATION = 5000; // 5 seconds per slide
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -23,6 +26,35 @@ const BlueprintSlideshow = () => {
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
+  };
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  // Auto-play logic
+  useEffect(() => {
+    if (isPlaying) {
+      timerRef.current = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % totalSlides);
+      }, SLIDE_DURATION);
+    } else {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [isPlaying]);
+
+  // Pause on manual interaction
+  const handleManualNavigation = (action: () => void) => {
+    action();
+    setIsPlaying(false); // Stop auto-play if user manually navigates
   };
 
   // Format slide number to match filename (slide-01.png, slide-02.png, etc.)
@@ -44,21 +76,30 @@ const BlueprintSlideshow = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5 }}
             className={`${isFullscreen ? 'max-h-full max-w-full object-contain' : 'w-full h-full object-contain'}`}
           />
         </AnimatePresence>
 
         {/* Navigation Overlay */}
-        <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className={`absolute inset-0 flex items-center justify-between p-4 transition-opacity duration-300 ${isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
           <button 
-            onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+            onClick={(e) => { e.stopPropagation(); handleManualNavigation(prevSlide); }}
             className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors backdrop-blur-sm"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
+          
+          {/* Center Play/Pause Button (Large) */}
           <button 
-            onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+            onClick={(e) => { e.stopPropagation(); togglePlay(); }}
+            className="p-4 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all backdrop-blur-sm transform hover:scale-110"
+          >
+            {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 ml-1" />}
+          </button>
+
+          <button 
+            onClick={(e) => { e.stopPropagation(); handleManualNavigation(nextSlide); }}
             className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors backdrop-blur-sm"
           >
             <ChevronRight className="w-6 h-6" />
@@ -66,10 +107,18 @@ const BlueprintSlideshow = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-between items-end">
-          <div className="text-white text-sm font-medium px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm">
-            Slide {currentSlide + 1} of {totalSlides}
+        <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-300 flex justify-between items-end ${isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+          <div className="flex items-center gap-3">
+            <div className="text-white text-sm font-medium px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm">
+              Slide {currentSlide + 1} of {totalSlides}
+            </div>
+            {isPlaying && (
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider animate-pulse">
+                <Play className="w-3 h-3 fill-current" /> Auto-Playing
+              </div>
+            )}
           </div>
+          
           <button 
             onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
             className="p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors backdrop-blur-sm"
@@ -77,7 +126,24 @@ const BlueprintSlideshow = () => {
             {isFullscreen ? <X className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
           </button>
         </div>
+
+        {/* Progress Bar (only when playing) */}
+        {isPlaying && (
+          <div className="absolute bottom-0 left-0 h-1 bg-blue-600 z-10 transition-all duration-[5000ms] ease-linear w-full origin-left" 
+               key={currentSlide} // Reset animation on slide change
+               style={{ 
+                 animation: `progress ${SLIDE_DURATION}ms linear`
+               }} 
+          />
+        )}
       </div>
+      
+      <style>{`
+        @keyframes progress {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
     </div>
   );
 };
@@ -118,7 +184,7 @@ export default function ProjectManagement() {
               The Project Blueprint
             </h2>
             <p className="text-muted-foreground mt-1">
-              Visual guide to the D10 SOP workflow. Review this before diving into the chapters below.
+              Visual guide to the D10 SOP workflow. Watch the overview or download for reference.
             </p>
           </div>
           <a 
