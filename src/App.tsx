@@ -10,6 +10,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Examples from "./pages/Examples";
 import ProjectManagement from "./pages/ProjectManagement";
+import CastleCaseStudy from "./pages/CastleCaseStudy";
+import ClientPortal from "./pages/ClientPortal";
 import Estimating from "./pages/Estimating";
 
 function Router() {
@@ -20,6 +22,8 @@ function Router() {
       <ProtectedRoute path="/examples" component={Examples} />
       <ProtectedRoute path="/financial" component={Home} />
       <ProtectedRoute path="/project-management" component={ProjectManagement} />
+      <ProtectedRoute path="/castle-case-study" component={CastleCaseStudy} />
+      <ProtectedRoute path="/client-portal" component={ClientPortal} />
       <ProtectedRoute path="/estimating" component={Estimating} />
       <ProtectedRoute path="/closeout" component={Home} />
       <ProtectedRoute path="/insurance" component={Home} />
