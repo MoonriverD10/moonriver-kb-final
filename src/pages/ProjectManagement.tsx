@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import projectManagementInfographic from "@/assets/project-management-infographic-clean.png";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare, Play, Pause, Maximize2, X, ChevronLeft, ChevronRight, Presentation, Network, BrainCircuit } from "lucide-react";
+import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare, Play, Pause, Maximize2, X, ChevronLeft, ChevronRight, Presentation, Network, BrainCircuit, ArrowLeft } from "lucide-react";
 import { MindMap } from "@/components/MindMap";
 import { Flashcards } from "@/components/Flashcards";
 
@@ -280,6 +281,12 @@ export default function ProjectManagement() {
     <div className="container mx-auto py-12 px-4 max-w-7xl">
       <div className="mb-12 space-y-8">
         <div>
+          <Link href="/">
+            <Button variant="ghost" className="mb-6 pl-0 hover:bg-transparent hover:text-primary group">
+              <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+              Back to Home
+            </Button>
+          </Link>
           <h1 className="text-4xl font-bold tracking-tight mb-4">Project Management Hub</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
             Your interactive guide to the Moon River Sign Company project lifecycle. Master the workflow from contract award to final closeout.
