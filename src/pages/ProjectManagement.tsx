@@ -60,6 +60,7 @@ const BlueprintSlideshow = () => {
   // Format slide number to match filename (slide-01.png, slide-02.png, etc.)
   const getSlidePath = (index: number) => {
     const slideNum = (index + 1).toString().padStart(2, '0');
+    // Ensure the path is absolute from the public root
     return `/images/blueprint/slide-${slideNum}.png`;
   };
 
@@ -78,6 +79,10 @@ const BlueprintSlideshow = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             className={`${isFullscreen ? 'max-h-full max-w-full object-contain' : 'w-full h-full object-contain'}`}
+            onError={(e) => {
+              console.error(`Failed to load image: ${getSlidePath(currentSlide)}`);
+              e.currentTarget.src = "https://placehold.co/600x400?text=Image+Not+Found"; // Fallback
+            }}
           />
         </AnimatePresence>
 
@@ -184,17 +189,10 @@ export default function ProjectManagement() {
               The Project Blueprint
             </h2>
             <p className="text-muted-foreground mt-1">
-              Visual guide to the D10 SOP workflow. Watch the overview or download for reference.
+              Visual guide to the D10 SOP workflow. Watch the overview to understand the big picture.
             </p>
           </div>
-          <a 
-            href="/D10_Project_Blueprint.pdf" 
-            download
-            className="flex items-center gap-2 px-4 py-2 bg-background border border-border rounded-lg text-sm font-medium text-foreground hover:bg-accent transition-colors shadow-sm"
-          >
-            <Download className="w-4 h-4" />
-            Download PDF
-          </a>
+          {/* Download button removed as requested */}
         </div>
         
         <BlueprintSlideshow />
