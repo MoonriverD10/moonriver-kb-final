@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import projectManagementInfographic from "@/assets/project-management-infographic-padded.png";
+import projectManagementInfographic from "@/assets/project-management-infographic-clean.png";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare, Play, Pause, Maximize2, X, ChevronLeft, ChevronRight, Presentation, Network, BrainCircuit } from "lucide-react";
@@ -286,20 +286,48 @@ export default function ProjectManagement() {
           </p>
         </div>
 
-        {/* 5-Stage Isometric Infographic */}
-        <div className="w-full bg-white rounded-xl shadow-sm border p-2 overflow-hidden relative group">
+        {/* 5-Stage Isometric Infographic with HTML Overlay */}
+        <div className="w-full bg-white rounded-xl shadow-sm border p-4 overflow-hidden relative group">
+          {/* The Clean Illustration */}
           <img 
             src={projectManagementInfographic} 
-            alt="Project Management Workflow: Contract -> Design -> Production -> Installation -> Closeout" 
-            className="w-full h-auto object-cover rounded-lg"
+            alt="Project Management Workflow" 
+            className="w-full h-auto object-cover rounded-lg mb-8"
           />
-          {/* Scroll Indicator - Positioned in the negative space */}
-          <div 
-            onClick={() => document.getElementById('project-stages-content')?.scrollIntoView({ behavior: 'smooth' })}
-            className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce bg-white border shadow-md px-6 py-2 rounded-full text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:bg-gray-50 transition-colors"
-          >
-            <ChevronRight className="w-4 h-4 rotate-90" />
-            Scroll for Details
+          
+          {/* HTML Text Overlay - Responsive Grid */}
+          <div className="grid grid-cols-5 gap-2 text-center mb-12 px-2">
+            <div className="flex flex-col items-center">
+              <h3 className="font-bold text-primary text-sm md:text-base lg:text-lg uppercase tracking-tight">Stage 1</h3>
+              <p className="text-xs md:text-sm font-semibold text-slate-700 uppercase leading-tight">Contract & Setup</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <h3 className="font-bold text-primary text-sm md:text-base lg:text-lg uppercase tracking-tight">Stage 2</h3>
+              <p className="text-xs md:text-sm font-semibold text-slate-700 uppercase leading-tight">Design & Approval</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <h3 className="font-bold text-primary text-sm md:text-base lg:text-lg uppercase tracking-tight">Stage 3</h3>
+              <p className="text-xs md:text-sm font-semibold text-slate-700 uppercase leading-tight">Production & Delivery</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <h3 className="font-bold text-primary text-sm md:text-base lg:text-lg uppercase tracking-tight">Stage 4</h3>
+              <p className="text-xs md:text-sm font-semibold text-slate-700 uppercase leading-tight">Installation</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <h3 className="font-bold text-primary text-sm md:text-base lg:text-lg uppercase tracking-tight">Stage 5</h3>
+              <p className="text-xs md:text-sm font-semibold text-slate-700 uppercase leading-tight">Closeout</p>
+            </div>
+          </div>
+
+          {/* Scroll Indicator - Centered at the bottom */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+            <div 
+              onClick={() => document.getElementById('project-stages-content')?.scrollIntoView({ behavior: 'smooth' })}
+              className="animate-bounce bg-white border shadow-md px-6 py-2 rounded-full text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:bg-gray-50 transition-colors"
+            >
+              <ChevronRight className="w-4 h-4 rotate-90" />
+              Scroll for Details
+            </div>
           </div>
         </div>
       </div>
