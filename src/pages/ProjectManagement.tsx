@@ -1,338 +1,227 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare } from "lucide-react";
+import { FileText, PenTool, Factory, HardHat, ClipboardCheck, CheckCircle2, ChevronRight, Download, BookOpen, Copy, ThumbsUp, ThumbsDown } from "lucide-react";
+import sopContentFull from "@/data/sopContentFull.json";
+import ReactMarkdown from 'react-markdown';
 
 export default function ProjectManagement() {
-  const [activeStep, setActiveStep] = useState("step1");
+  const [activeStageId, setActiveStageId] = useState(1);
 
-  const steps = [
-    {
-      id: "step1",
-      title: "1. Contract & Setup",
-      icon: FileText,
-      description: "Review, Execute, and Initialize",
-      content: (
-        <div className="space-y-6">
-          <div className="prose dark:prose-invert max-w-none">
-            <h3>Chapter 1: Awarded Contract/Purchase Order</h3>
-            <p>
-              Starting a project on a positive note is crucial for success. Thoroughly examine the Contract or Purchase Order immediately upon receipt.
-            </p>
-            
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-500 my-4">
-              <h4 className="text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2 mt-0">
-                <AlertCircle className="h-5 w-5" />
-                Critical Review Elements
-              </h4>
-              <ul className="mt-2 space-y-1 text-sm">
-                <li><strong>Contract Amount:</strong> Ensure it matches your original bid exactly.</li>
-                <li><strong>Scope of Work:</strong> Compare listed Signage Work/Scope to your bid.</li>
-                <li><strong>Project Details:</strong> Verify project name, location, and job number.</li>
-                <li><strong>Installation Responsibilities:</strong> Check material, labor, supervision, and equipment needs.</li>
-              </ul>
-            </div>
+  const stages = sopContentFull.stages;
+  const activeStage = stages.find(s => s.id === activeStageId) || stages[0];
 
-            <h3>Chapter 2: Execute Contract</h3>
-            <p>
-              After completing due diligence, sign the contract (including all initials) and email it to the General Contractor's project manager.
-            </p>
-            <p className="italic text-muted-foreground">
-              "A handshake may seal intent, but signatures seal destiny."
-            </p>
-
-            <h3>Chapter 3: Start-up Documents</h3>
-            <div className="grid gap-4 md:grid-cols-2 mt-4">
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base">Certificate of Insurance (COI)</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm">
-                  Required with every Contract. Proof of General Liability, Auto, and Workers' Comp coverage.
-                  <br/><br/>
-                  <strong>Pro Tip:</strong> Ensure "stored materials" are covered if you are billing for them before installation.
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base">Schedule of Values (SOV)</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm">
-                  A detailed breakdown of your bid. This form enables the G.C. to approve your monthly billing based on percentage of work completed.
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "step2",
-      title: "2. Design & Approval",
-      icon: PenTool,
-      description: "Submittals, Shop Drawings, and Samples",
-      content: (
-        <div className="space-y-6">
-          <div className="prose dark:prose-invert max-w-none">
-            <h3>The Submittal Process</h3>
-            <p>
-              This is the "Measure Twice, Cut Once" phase. You must obtain formal approval from the Architect and Owner before manufacturing begins.
-            </p>
-
-            <div className="grid gap-6 md:grid-cols-3 my-6">
-              <div className="border rounded-lg p-4 text-center hover:bg-accent/50 transition-colors">
-                <div className="font-bold text-lg mb-2">1. Shop Drawings</div>
-                <p className="text-sm text-muted-foreground">Detailed technical drawings showing dimensions, materials, and mounting methods.</p>
-              </div>
-              <div className="border rounded-lg p-4 text-center hover:bg-accent/50 transition-colors">
-                <div className="font-bold text-lg mb-2">2. Material Samples</div>
-                <p className="text-sm text-muted-foreground">Physical samples of paint colors, vinyls, and metals for finish approval.</p>
-              </div>
-              <div className="border rounded-lg p-4 text-center hover:bg-accent/50 transition-colors">
-                <div className="font-bold text-lg mb-2">3. Product Data</div>
-                <p className="text-sm text-muted-foreground">Spec sheets for LEDs, power supplies, and other components.</p>
-              </div>
-            </div>
-
-            <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border-l-4 border-orange-500">
-              <h4 className="text-orange-700 dark:text-orange-300 font-bold mt-0">Managing the Approval Loop</h4>
-              <p className="text-sm mt-2">
-                Expect revisions. When drawings are returned "Revise and Resubmit," prioritize the changes and turn them around quickly to avoid schedule delays. Only proceed to production when you receive a status of <strong>"Approved"</strong> or <strong>"Approved as Noted."</strong>
-              </p>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "step3",
-      title: "3. Production & Delivery",
-      icon: Truck,
-      description: "Fabrication, Quality Control, and Logistics",
-      content: (
-        <div className="space-y-6">
-          <div className="prose dark:prose-invert max-w-none">
-            <h3>Releasing to Production</h3>
-            <p>
-              Once submittals are approved, formally release orders to manufacturers. Confirm production lead times immediately and update the General Contractor.
-            </p>
-
-            <h3>Logistics & Delivery</h3>
-            <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Clear Instructions:</strong> Give the manufacturer the site superintendent's phone number for delivery coordination.</li>
-              <li><strong>Receiving:</strong> Ensure a knowledgeable person is on-site to inspect deliveries. If the G.C. accepts damaged goods without noting it, you may be liable.</li>
-              <li><strong>Direct Shipping:</strong> Whenever possible, ship directly to the job site to minimize handling damages.</li>
-            </ul>
-
-            <div className="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg mt-6">
-              <h4 className="font-bold flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-500" />
-                Quality Control Checklist
-              </h4>
-              <div className="grid grid-cols-2 gap-2 mt-3 text-sm">
-                <div className="flex items-center gap-2"><input type="checkbox" disabled /> Correct Colors</div>
-                <div className="flex items-center gap-2"><input type="checkbox" disabled /> Correct Dimensions</div>
-                <div className="flex items-center gap-2"><input type="checkbox" disabled /> No Scratches/Dents</div>
-                <div className="flex items-center gap-2"><input type="checkbox" disabled /> All Hardware Included</div>
-                <div className="flex items-center gap-2"><input type="checkbox" disabled /> UL Labels Applied</div>
-                <div className="flex items-center gap-2"><input type="checkbox" disabled /> Templates Included</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "step4",
-      title: "4. Installation",
-      icon: HardHat,
-      description: "Site Prep, Safety, and Execution",
-      content: (
-        <div className="space-y-6">
-          <div className="prose dark:prose-invert max-w-none">
-            <h3>Pre-Installation Coordination</h3>
-            <p>
-              Installation is where the rubber meets the road. Success depends on coordination <em>before</em> the truck leaves the shop.
-            </p>
-
-            <div className="grid gap-4 md:grid-cols-2 my-4">
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-bold mb-2">Site Readiness</h4>
-                <p className="text-sm text-muted-foreground">Confirm with the Superintendent: Is the wall ready? Is the power run? Is the ground level for the lift?</p>
-              </div>
-              <div className="p-4 border rounded-lg">
-                <h4 className="font-bold mb-2">Equipment & Access</h4>
-                <p className="text-sm text-muted-foreground">Determine if you need a crane, boom truck, or scissor lift. Verify site access for heavy equipment.</p>
-              </div>
-            </div>
-
-            <h3>Safety Plan</h3>
-            <p>
-              A comprehensive safety plan adhering to OSHA standards is often required. For signage, this can usually be a simple one-page outline, but it must be on file.
-            </p>
-
-            <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-500 mt-4">
-              <h4 className="text-yellow-700 dark:text-yellow-300 font-bold mt-0">Permits & Licenses</h4>
-              <p className="text-sm mt-2">
-                <strong>Don't get stopped on install day!</strong> Confirm all signage and electrical permits are pulled and posted on site. If the G.C. hasn't pulled them, you must handle it.
-              </p>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: "step5",
-      title: "5. Closeout & Payment",
-      icon: ClipboardCheck,
-      description: "Warranties, Retainage, and Final Invoice",
-      content: (
-        <div className="space-y-6">
-          <div className="prose dark:prose-invert max-w-none">
-            <h3>The Finish Line</h3>
-            <p>
-              The job isn't done until the paperwork is submitted and the final check clears.
-            </p>
-
-            <h3>Required Closeout Documents</h3>
-            <ul className="space-y-2 mt-4">
-              <li className="flex items-start gap-3 p-3 bg-card rounded-md border">
-                <FileText className="h-5 w-5 text-primary mt-0.5" />
-                <div>
-                  <strong>As-Built Drawings:</strong>
-                  <p className="text-sm text-muted-foreground">Final drawings showing exactly how the signs were built and installed, noting any field changes.</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3 p-3 bg-card rounded-md border">
-                <ShieldCheck className="h-5 w-5 text-primary mt-0.5" />
-                <div>
-                  <strong>Warranty Documents:</strong>
-                  <p className="text-sm text-muted-foreground">Standard 1-year warranty on labor/materials, plus manufacturer warranties on LEDs/power supplies.</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3 p-3 bg-card rounded-md border">
-                <CheckSquare className="h-5 w-5 text-primary mt-0.5" />
-                <div>
-                  <strong>Maintenance Manual:</strong>
-                  <p className="text-sm text-muted-foreground">Instructions for cleaning and servicing the signage.</p>
-                </div>
-              </li>
-            </ul>
-
-            <div className="mt-6">
-              <h3>Final Payment & Retainage</h3>
-              <p>
-                Submit your final Pay Application (often AIA G702/G703) for the remaining balance, including Retainage (usually 10%). Ensure all lien waivers are submitted to release payment.
-              </p>
-            </div>
-          </div>
-        </div>
-      )
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "FileSignature": return FileText;
+      case "PenTool": return PenTool;
+      case "Factory": return Factory;
+      case "HardHat": return HardHat;
+      case "ClipboardCheck": return ClipboardCheck;
+      default: return FileText;
     }
-  ];
-
-
+  };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-heading font-bold text-primary">Project Management Workflow</h1>
-        <p className="text-muted-foreground text-lg">
-          The Moon River Standard Operating Procedure (SOP) for executing signage projects.
+    <div className="container mx-auto p-6 max-w-7xl">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight mb-2">Project Management Hub</h1>
+        <p className="text-muted-foreground">
+          Your interactive guide to the Moon River Sign Company project lifecycle.
+          Click a stage below to access the full SOP manual for that phase.
         </p>
       </div>
 
-      {/* Interactive Infographic Section */}
-      <Card className="overflow-hidden border-2 border-primary/10 shadow-lg bg-white dark:bg-slate-950">
-        <div className="relative w-full aspect-[16/9] md:aspect-[2.2/1] bg-slate-50 dark:bg-slate-900">
-          {/* The Infographic Image */}
-          <img 
-            src="/documents/previews/D10PMInfographicv2.png" 
-            alt="Project Management Workflow" 
-            className="w-full h-full object-contain"
-          />
-          
-          {/* Clickable Hotspots - Overlay Grid */}
-          <div className="absolute inset-0 grid grid-cols-5 h-full w-full">
-            {steps.map((step) => (
+      {/* Interactive Infographic Navigation */}
+      <div className="relative mb-12">
+        {/* Connecting Line */}
+        <div className="absolute top-1/2 left-0 w-full h-1 bg-muted -z-10 hidden md:block transform -translate-y-1/2" />
+        
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          {stages.map((stage) => {
+            const Icon = getIcon(stage.icon);
+            const isActive = stage.id === activeStageId;
+            
+            return (
               <button
-                key={step.id}
-                onClick={() => setActiveStep(step.id)}
+                key={stage.id}
+                onClick={() => setActiveStageId(stage.id)}
                 className={cn(
-                  "h-full w-full transition-all duration-200 focus:outline-none group relative",
-                  activeStep === step.id 
-                    ? "bg-primary/10 ring-2 ring-inset ring-primary" 
-                    : "hover:bg-primary/5"
+                  "flex flex-col items-center p-4 rounded-xl transition-all duration-300 border-2 bg-background relative group",
+                  isActive 
+                    ? "border-primary shadow-lg scale-105 z-10" 
+                    : "border-muted hover:border-primary/50 hover:bg-accent/50"
                 )}
               >
                 <div className={cn(
-                  "absolute bottom-0 left-0 right-0 p-2 text-xs font-bold bg-primary/90 text-white opacity-0 transition-opacity",
-                  activeStep === step.id ? "opacity-100" : "group-hover:opacity-100"
+                  "p-3 rounded-full mb-3 transition-colors",
+                  isActive ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground group-hover:text-primary"
                 )}>
-                  View Details
+                  <Icon className="h-6 w-6" />
                 </div>
+                <div className="text-center">
+                  <div className={cn("font-bold text-sm mb-1", isActive ? "text-primary" : "text-foreground")}>
+                    {stage.id}. {stage.title}
+                  </div>
+                  <div className="text-xs text-muted-foreground line-clamp-2 hidden md:block">
+                    {stage.summary}
+                  </div>
+                </div>
+                
+                {/* Active Indicator Arrow */}
+                {isActive && (
+                  <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-primary hidden md:block" />
+                )}
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
-        <div className="p-4 bg-muted/30 border-t text-center text-sm text-muted-foreground">
-          <span className="inline-flex items-center gap-2">
-            <PenTool className="h-4 w-4 animate-bounce" />
-            Click on any stage in the diagram above to view the detailed SOP procedures below.
-          </span>
-        </div>
-      </Card>
+      </div>
 
-      {/* Detailed Content Section */}
-      <div className="grid lg:grid-cols-4 gap-8">
-        {/* Sidebar Navigation (Desktop) */}
-        <div className="hidden lg:block space-y-2">
-          <h3 className="font-bold text-sm uppercase tracking-wider text-muted-foreground mb-4 px-2">Workflow Stages</h3>
-          {steps.map((step) => (
-            <button
-              key={step.id}
-              onClick={() => setActiveStep(step.id)}
-              className={cn(
-                "w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center gap-3",
-                activeStep === step.id 
-                  ? "bg-primary text-primary-foreground shadow-md" 
-                  : "hover:bg-accent text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <step.icon className="h-4 w-4" />
-              {step.title}
-            </button>
-          ))}
-        </div>
-
-        {/* Main Content Area */}
-        <div className="lg:col-span-3">
-          <Card className="min-h-[500px] border-l-4 border-l-primary">
-            <CardHeader className="border-b bg-muted/10 pb-6">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-primary/10 rounded-full text-primary">
-                  {(() => {
-                    const Icon = steps.find(s => s.id === activeStep)?.icon;
-                    return Icon ? <Icon className="h-6 w-6" /> : null;
-                  })()}
-                </div>
-                <CardTitle className="text-2xl">
-                  {steps.find(s => s.id === activeStep)?.title}
+      {/* Full-Width Reader View (Optimized for Study) */}
+      <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="grid lg:grid-cols-4 gap-6">
+          
+          {/* Sidebar Navigation */}
+          <div className="lg:col-span-1 space-y-6">
+            <Card className="sticky top-6">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                  In This Section
                 </CardTitle>
-              </div>
-              <CardDescription className="text-base ml-14">
-                {steps.find(s => s.id === activeStep)?.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 md:p-8">
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
-                {steps.find(s => s.id === activeStep)?.content}
-              </div>
-            </CardContent>
-          </Card>
+              </CardHeader>
+              <CardContent className="space-y-1">
+                {activeStage.fullContent.map((chapter, idx) => (
+                  <div key={idx} className="mb-4 last:mb-0">
+                    <div className="font-medium text-sm mb-2 text-foreground flex items-center gap-2">
+                      <BookOpen className="h-3 w-3 text-primary" />
+                      {chapter.chapterTitle.split(':')[0]}
+                    </div>
+                    <ul className="space-y-1 border-l-2 border-muted ml-1.5 pl-3">
+                      {chapter.sections.map((section, sIdx) => (
+                        <li key={sIdx}>
+                          <a 
+                            href={`#section-${idx}-${sIdx}`} 
+                            className="text-xs text-muted-foreground hover:text-primary block py-1 transition-colors line-clamp-1"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              document.getElementById(`section-${idx}-${sIdx}`)?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                          >
+                            {section.heading.replace(/^Step \d+: /, '')}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                  Downloads
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Button variant="outline" size="sm" className="w-full justify-start gap-2">
+                  <Download className="h-3 w-3" />
+                  Download Full SOP
+                </Button>
+                <Button variant="outline" size="sm" className="w-full justify-start gap-2">
+                  <CheckCircle2 className="h-3 w-3" />
+                  Stage Checklist
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Main Content Area - Clean Reader Mode */}
+          <div className="lg:col-span-3">
+            <Card className="border-none shadow-none bg-transparent">
+              <CardContent className="p-0 space-y-8">
+                
+                {/* Header Block */}
+                <div className="flex items-start gap-4 p-6 bg-card rounded-xl border shadow-sm">
+                  <div className="p-3 bg-primary/10 rounded-full shrink-0">
+                    {(() => {
+                      const Icon = getIcon(activeStage.icon);
+                      return <Icon className="h-6 w-6 text-primary" />;
+                    })()}
+                  </div>
+                  <div className="space-y-1">
+                    <h2 className="text-2xl font-bold tracking-tight">{activeStage.title}</h2>
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      {activeStage.summary}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Content Blocks */}
+                {activeStage.fullContent.map((chapter, idx) => (
+                  <div key={idx} className="space-y-6">
+                    {/* Chapter Divider */}
+                    <div className="flex items-center gap-4 py-4">
+                      <div className="h-px bg-border flex-1" />
+                      <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
+                        {chapter.chapterTitle}
+                      </span>
+                      <div className="h-px bg-border flex-1" />
+                    </div>
+
+                    {chapter.sections.map((section, sIdx) => (
+                      <div 
+                        key={sIdx} 
+                        id={`section-${idx}-${sIdx}`} 
+                        className="group relative bg-card rounded-xl border shadow-sm p-8 md:p-10 scroll-mt-24 transition-all hover:shadow-md"
+                      >
+                        <div className="space-y-6">
+                          <h3 className="text-xl font-bold tracking-tight text-foreground">
+                            {section.heading}
+                          </h3>
+                          
+                          <div className="prose prose-slate dark:prose-invert max-w-none 
+                            prose-headings:font-semibold prose-headings:tracking-tight
+                            prose-p:leading-8 prose-p:text-[1.05rem] prose-p:text-slate-600 dark:prose-p:text-slate-300
+                            prose-li:text-slate-600 dark:prose-li:text-slate-300 prose-li:marker:text-primary/70
+                            prose-strong:text-foreground prose-strong:font-bold
+                            prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:bg-slate-50 dark:prose-blockquote:bg-slate-900/50 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-slate-700 dark:prose-blockquote:text-slate-300
+                          ">
+                            <ReactMarkdown>{section.body}</ReactMarkdown>
+                          </div>
+                        </div>
+
+                        {/* Interaction Bar (Subtle) */}
+                        <div className="flex items-center gap-2 mt-8 pt-4 border-t opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
+                            <Copy className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
+                            <ThumbsUp className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+
+                {/* End of Section */}
+                <div className="flex flex-col items-center justify-center py-12 text-muted-foreground space-y-4">
+                  <div className="h-12 w-1 bg-gradient-to-b from-border to-transparent" />
+                  <Button variant="outline" className="gap-2" onClick={() => {
+                    const nextId = activeStageId < 5 ? activeStageId + 1 : 1;
+                    setActiveStageId(nextId);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}>
+                    Continue to Next Stage <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

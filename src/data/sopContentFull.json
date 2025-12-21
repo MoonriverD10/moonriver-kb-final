@@ -1,0 +1,164 @@
+{
+  "stages": [
+    {
+      "id": 1,
+      "title": "Contract & Setup",
+      "icon": "FileSignature",
+      "summary": "Meticulously review the contract against the original bid, execute, and submit all required startup documents.",
+      "fullContent": [
+        {
+          "chapterTitle": "Chapter 1: Awarded Contract/Purchase Order!",
+          "sections": [
+            {
+              "heading": "Step 1: Review Contract/Purchase Order",
+              "body": "Starting a project on a positive note is crucial for success, requiring a thorough examination of the Contract or Purchase Order. It's vital to note that some contract provisions are more important than others.\n\nNOTE: If there's been a significant time gap since your initial bid, reassessing the financial aspects of the project is essential. For example, if there's a considerable time difference between the bid submission and the current date, check if material/labor costs have increased. General contractors usually accommodate moderate cost increases due to delays beyond their control, affecting project progress or the distribution of contracts/purchase orders to sub-contractors."
+            },
+            {
+              "heading": "Critical Contract Review Elements",
+              "body": "**Primary Verification Items**\n* Contract Amount: Ensure it matches the original bid.\n* Scope of Work: Compare listed Signage Work/Scope to the original bid.\n\n**Secondary Verification Items**\n* Project Details: Verify project name, location, and job number.\n* Key Contact Information: Collect contact info for the Project Manager, Job Site Superintendent, and Billing/Accounting.\n\n**Critical Requirements**\n* Installation Responsibilities: Understand material, labor, supervision, equipment needs, ADA code compliance, and sealing of penetrations.\n* Material and Quality Requirements: Confirm color samples, sign finishes and fonts, mounting devices, and storage specifications match your originally proposed bid.\n\n**Project Management Elements**\n* Timeline Requirements: Acknowledge project schedule and work hours (Access to the project).\n* Coordination Requirements: Ensure coordination with adjacent trades and communication with the Construction Manager.\n\n**Administrative Requirements**\n* Insurance and Documentation: Prepare Certificate of Insurance. Your insurance agent who handles your Business Owners Policy (BOP) will provide this document. Permits, submittal requirements, shop drawings, and warranties will begin. Per contract you usually have 2 weeks from the date of an executed contract (Both parties signed the contract) to fulfill all Administrative requirements.\n* Payment Terms: Understand billing procedures, payment schedule, and change order processes."
+            },
+            {
+              "heading": "PRO TIP: Before Finalizing",
+              "body": "Before finalizing the contract, consult with the General Contractor's Project Manager about your signage scope and confirm that what you originally bid is what they have listed in your subcontract. This should happen before the contract/purchase order is executed.\n\nAddress any disputes or ambiguities early to maintain negotiating leverage. Formalize any discrepancies by amending the contract or securing written confirmation of the resolutions.\n\n**Key Business Advisory:** Request to have your (D10) original bid amended to the Contract and or Purchase order. If the General Contractor refuses to do this, then you especially will want to look very close at exactly what it is they are indicating in the contract that you will be providing - materials/labor etc. Consult legal counsel when drafting your bid proposal, including terms on the proposal's validity duration."
+            },
+            {
+              "heading": "Step 2: Compare to Original Bid",
+              "body": "Request all related documents from your estimator from the bidding process, including your bid, drawings, specs, addendums, and quotes. Make sure you have your contract accessible to compare the total awarded amount with your Original Bid.\n\nThis comparison is vital for a smooth start to your contractual obligations. While the bid and contract amounts are usually the same, discrepancies can occur, often due to an administrative oversight, such as a typographical error or incorrect entry by the General Contractor. Identifying and addressing these discrepancies before signing the contract or purchase order is critical."
+            }
+          ]
+        },
+        {
+          "chapterTitle": "Chapter 2: Execute Contract",
+          "sections": [
+            {
+              "heading": "Step 1: Sign Contract/Purchase Order",
+              "body": "After completing due diligence and reviewing the contract, you're ready to sign it, including any pages needing signatures and initials. Then, email the signed document to the General Contractor's project manager or contracts administrator.\n\n**Pro Tip:** Ensure you have a contract signed by both you and the General Contractor for it to be legally binding. If the General Contractor's signature is missing, sign and return the contract, expecting a fully executed contract in return before the commencement of any work."
+            },
+            {
+              "heading": "Job Site Meeting",
+              "body": "**Pro Tip:** This is a great time to schedule a meeting either at the jobsite or virtually with the job site superintendent and project manager. In that meeting you will want to:\n\n* Review scope of work. For example if there is illuminated signage you will want to speak to the electrician to confirm wiring requirements/power supply locations and where your leads/wires will be connecting to the main power. On all exterior signage you will want to confirm the G.C. is providing \"blocking\" marine board behind the walls for your signage to anchor to.\n* You will want to understand on exterior and or interior installs the timing of your work in relation to other trades and what equipment you will need to reach your install areas, be it, a crane, a boom truck or a lift.\n* Also, confirm that the G.C. has pulled all general permits as they relate to signage. If not, you will need to start the process of applying and pulling permits for signage and maybe even electrical permits."
+            },
+            {
+              "heading": "Wise Saying",
+              "body": "> \"A handshake may seal intent, but signatures seal destiny\""
+            }
+          ]
+        },
+        {
+          "chapterTitle": "Chapter 3: Provide \"Start-up\" Documents",
+          "sections": [
+            {
+              "heading": "Step 1: Certificate of Insurance (C.O.I.)",
+              "body": "A Certificate of Insurance (C.O.I.) will be required with every Contract – Materials and Installation you sign. You typically do not need a (C.O.I.) for Purchase Orders – Materials Only.\n\n**Risk Management and Protection**\nA COI provides tangible proof that subcontractors have the necessary insurance coverage to protect against potential financial disasters and liability claims. This documentation ensures that all parties working on a project maintain adequate coverage for:\n* General Liability Insurance\n* Auto Insurance\n* Workers’ Compensation Insurance\n* Umbrella/Excess Insurance\n\n**Contractual Requirements**\nNo contractor or subcontractor should begin work until proper certificates of insurance have been submitted and approved. This requirement is particularly important because:\n* It's typically a mandatory contractual obligation\n* Payment for work may be withheld without proper documentation\n* Work cannot legally proceed without verification of coverage"
+            },
+            {
+              "heading": "Step 2: Schedule of Values (S.O.V.)",
+              "body": "In addition there will usually be a request for a Schedule of Values (S.O.V.).\n\n**Clarification:** Ensure the numbers accurately reflect your agreement with the General Contractor to avoid misunderstandings. It's okay if the values aren't exact, as exact material or labor costs may not be known. Remember, you're entering the total value of each item, including your costs, mark-up, and overhead."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Design & Approval",
+      "icon": "PenTool",
+      "summary": "Submit manufacturer drawings and material samples to the GC for formal architect review and approval.",
+      "fullContent": [
+        {
+          "chapterTitle": "Chapter 5: Start on Submittals",
+          "sections": [
+            {
+              "heading": "The Submittal Process",
+              "body": "This is the \"Measure Twice, Cut Once\" phase. You must obtain formal approval from the Architect and Owner before manufacturing begins. Do not start production until you have a stamped 'Approved' submittal."
+            },
+            {
+              "heading": "Types of Submittals",
+              "body": "1. **Shop Drawings:** Detailed technical drawings showing dimensions, materials, and mounting methods.\n2. **Material Samples:** Physical samples of paint colors, vinyls, and metals for finish approval.\n3. **Product Data:** Spec sheets for LEDs, power supplies, and other components."
+            },
+            {
+              "heading": "Managing Revisions",
+              "body": "Expect revisions. When drawings are returned \"Revise and Resubmit,\" prioritize the changes and turn them around quickly to avoid schedule delays. Only proceed to production when you receive a status of **\"Approved\"** or **\"Approved as Noted.\"**"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Production",
+      "icon": "Factory",
+      "summary": "Once submittals are approved, formally release orders to manufacturers and confirm production lead times.",
+      "fullContent": [
+        {
+          "chapterTitle": "Chapter 6: Approval Received and Released into Production",
+          "sections": [
+            {
+              "heading": "Releasing to Production",
+              "body": "Once submittals are approved, formally release orders to manufacturers. Confirm production lead times immediately and update the General Contractor."
+            },
+            {
+              "heading": "Logistics & Delivery",
+              "body": "* **Clear Instructions:** Give the manufacturer the site superintendent's phone number for delivery coordination.\n* **Receiving:** Ensure a knowledgeable person is on-site to inspect deliveries. If the G.C. accepts damaged goods without noting it, you may be liable.\n* **Direct Shipping:** Whenever possible, ship directly to the job site to minimize handling damages."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Installation",
+      "icon": "HardHat",
+      "summary": "Coordinate logistics with installers and the on-site superintendent to ensure the site is ready for installation.",
+      "fullContent": [
+        {
+          "chapterTitle": "Chapter 8: Coordinate Installation",
+          "sections": [
+            {
+              "heading": "Pre-Installation Coordination",
+              "body": "Installation is where the rubber meets the road. Success depends on coordination *before* the truck leaves the shop.\n\n**Site Readiness:** Confirm with the Superintendent: Is the wall ready? Is the power run? Is the ground level for the lift?\n\n**Equipment & Access:** Determine if you need a crane, boom truck, or scissor lift. Verify site access for heavy equipment."
+            },
+            {
+              "heading": "Safety Plan",
+              "body": "A comprehensive safety plan adhering to OSHA standards is often required. For signage, this can usually be a simple one-page outline, but it must be on file."
+            },
+            {
+              "heading": "Permits & Licenses",
+              "body": "**Don't get stopped on install day!** Confirm all signage and electrical permits are pulled and posted on site. If the G.C. hasn't pulled them, you must handle it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Closeout",
+      "icon": "ClipboardCheck",
+      "summary": "Submit final pay applications for retainage and provide all required warranty and maintenance documents.",
+      "fullContent": [
+        {
+          "chapterTitle": "Chapter 10: Punch List / Close Out",
+          "sections": [
+            {
+              "heading": "The Finish Line",
+              "body": "The job isn't done until the paperwork is submitted and the final check clears."
+            },
+            {
+              "heading": "Required Closeout Documents",
+              "body": "* **As-Built Drawings:** Final drawings showing exactly how the signs were built and installed, noting any field changes.\n* **Warranty Documents:** Standard 1-year warranty on labor/materials, plus manufacturer warranties on LEDs/power supplies.\n* **Maintenance Manual:** Instructions for cleaning and servicing the signage."
+            }
+          ]
+        },
+        {
+          "chapterTitle": "Chapter 11: Billing / Collections",
+          "sections": [
+            {
+              "heading": "Final Payment & Retainage",
+              "body": "Submit your final Pay Application (often AIA G702/G703) for the remaining balance, including Retainage (usually 10%). Ensure all lien waivers are submitted to release payment."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

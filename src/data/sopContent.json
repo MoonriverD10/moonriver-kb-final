@@ -1,0 +1,217 @@
+{
+  "stages": [
+    {
+      "id": 1,
+      "title": "Contract & Setup",
+      "icon": "FileSignature",
+      "summary": "Meticulously review the contract against the original bid, execute, and submit all required startup documents.",
+      "content": {
+        "overview": "Starting a project on a positive note is crucial for success. This phase involves a thorough examination of the Contract or Purchase Order to ensure alignment with your original bid.",
+        "steps": [
+          {
+            "title": "Review Contract/Purchase Order",
+            "details": [
+              "Verify Contract Amount matches original bid.",
+              "Compare Scope of Work listed to original bid.",
+              "Verify Project Details (name, location, job number).",
+              "Collect Key Contact Info (PM, Superintendent, Billing).",
+              "Confirm Installation Responsibilities (material, labor, equipment, ADA compliance).",
+              "Check Timeline & Coordination Requirements."
+            ]
+          },
+          {
+            "title": "Compare to Original Bid",
+            "details": [
+              "Request all bid documents (drawings, specs, quotes) from estimator.",
+              "Identify discrepancies (typos, incorrect entries) before signing.",
+              "PRO TIP: Consult with GC's Project Manager about signage scope before executing contract."
+            ]
+          },
+          {
+            "title": "Execute Contract",
+            "details": [
+              "Sign contract (including all initial pages).",
+              "Email signed document to GC's PM or contracts administrator.",
+              "Ensure you receive a fully executed contract (signed by both parties) in return."
+            ]
+          },
+          {
+            "title": "Submit Start-up Documents",
+            "details": [
+              "Certificate of Insurance (COI): Required for every contract. Must include General Liability, Auto, Workers' Comp.",
+              "Schedule of Values (SOV): Detailed breakdown of bid for billing purposes.",
+              "W-9 Form: For tax identification.",
+              "Safety Plan: Simple one-page outline adhering to OSHA standards."
+            ]
+          }
+        ],
+        "proTips": [
+          "If there's a significant time gap since the bid, check for material/labor cost increases.",
+          "Address disputes early to maintain negotiating leverage.",
+          "Always get written confirmation of any resolutions or contract amendments.",
+          "A handshake may seal intent, but signatures seal destiny."
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "title": "Design & Approval",
+      "icon": "PenTool",
+      "summary": "Submit manufacturer drawings and material samples to the GC for formal architect review and approval.",
+      "content": {
+        "overview": "This phase bridges the gap between the contract scope and the physical product. It ensures that what is built matches the architect's vision and the client's needs.",
+        "steps": [
+          {
+            "title": "Prepare Submittals",
+            "details": [
+              "Gather manufacturer drawings and material samples.",
+              "Create a Submittal Transmittal sheet listing all items.",
+              "Ensure all samples are clearly labeled with project name and spec number."
+            ]
+          },
+          {
+            "title": "Submit to GC",
+            "details": [
+              "Send digital copies of drawings via email or project portal.",
+              "Ship physical samples to the GC's office (or Architect's office if directed).",
+              "Track submission date to monitor approval timeline."
+            ]
+          },
+          {
+            "title": "Review & Revise",
+            "details": [
+              "Receive 'Redlines' (markups) from Architect.",
+              "Revise drawings based on comments (e.g., 'Change font size', 'Verify color match').",
+              "Resubmit for final approval if 'Revise and Resubmit' is noted."
+            ]
+          }
+        ],
+        "proTips": [
+          "Never start production without 'Approved' or 'Approved as Noted' submittals.",
+          "Keep a log of all submittal dates and responses.",
+          "If the Architect changes the scope during review (e.g., 'Add 2 more signs'), issue a Change Order request immediately."
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "title": "Production",
+      "icon": "Factory",
+      "summary": "Once submittals are approved, formally release orders to manufacturers and confirm production lead times.",
+      "content": {
+        "overview": "With approvals in hand, the project moves to fabrication. This stage is about managing vendors, timelines, and quality control before items reach the site.",
+        "steps": [
+          {
+            "title": "Release for Fabrication",
+            "details": [
+              "Send 'Release for Production' email to manufacturers.",
+              "Attach the FINAL approved drawings (do not rely on old versions).",
+              "Confirm pricing has not changed since the quote."
+            ]
+          },
+          {
+            "title": "Track Lead Times",
+            "details": [
+              "Get a confirmed ship date from the manufacturer.",
+              "Update the GC's Project Manager on the expected delivery schedule.",
+              "Buffer the schedule: Add 3-5 days to the manufacturer's date for safety."
+            ]
+          },
+          {
+            "title": "Quality Control (Pre-Ship)",
+            "details": [
+              "Request photos of finished goods before they crate/ship.",
+              "Verify colors, spelling, and dimensions against approved drawings.",
+              "Check for mounting hardware inclusion."
+            ]
+          }
+        ],
+        "proTips": [
+          "Don't just email—call to confirm they received the order.",
+          "Double-check that the 'Ship To' address is correct (Job site vs. Warehouse).",
+          "Ensure the manufacturer labels crates with the Project Name and Sign Type."
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "title": "Installation",
+      "icon": "HardHat",
+      "summary": "Coordinate logistics with installers and the on-site superintendent to ensure the site is ready for installation.",
+      "content": {
+        "overview": "The physical execution of the work. Success here depends on coordination, site readiness, and having the right equipment.",
+        "steps": [
+          {
+            "title": "Pre-Install Coordination",
+            "details": [
+              "Contact Site Superintendent 1 week prior to confirm site readiness.",
+              "Verify wall blocking is installed (for heavy signs).",
+              "Confirm electrical rough-ins are complete and in the right spot."
+            ]
+          },
+          {
+            "title": "Logistics & Equipment",
+            "details": [
+              "Schedule boom trucks, lifts, or cranes if needed.",
+              "Ensure installers have badging/safety gear (PPE) required for the site.",
+              "Coordinate delivery of signs to coincide with installer arrival."
+            ]
+          },
+          {
+            "title": "Execution & Sign-Off",
+            "details": [
+              "Install signs per approved drawings.",
+              "Take photos of completed work (Close-up and Wide shots).",
+              "Get 'Work Order' signed by Site Superintendent verifying completion."
+            ]
+          }
+        ],
+        "proTips": [
+          "Always have a 'Plan B' for bad weather on exterior installs.",
+          "Bring touch-up paint and extra fasteners.",
+          "If a sign can't be installed due to site conditions, document it with photos immediately."
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Closeout",
+      "icon": "ClipboardCheck",
+      "summary": "Submit final pay applications for retainage and provide all required warranty and maintenance documents.",
+      "content": {
+        "overview": "The final lap. Getting paid and providing the owner with the documents they need to maintain their new signage.",
+        "steps": [
+          {
+            "title": "Punch List",
+            "details": [
+              "Walk the site with the GC to identify any deficiencies.",
+              "Fix any issues (scratches, loose letters) immediately.",
+              "Get final sign-off on the Punch List."
+            ]
+          },
+          {
+            "title": "Closeout Documents",
+            "details": [
+              "Submit Warranty Letter (typically 1 year parts/labor).",
+              "Provide Maintenance Instructions (cleaning, bulb replacement).",
+              "Submit As-Built Drawings (if changes were made during install)."
+            ]
+          },
+          {
+            "title": "Final Billing",
+            "details": [
+              "Submit final AIA G702/G703 Pay App.",
+              "Bill for 100% of contract including Retainage.",
+              "Provide Final Lien Waiver."
+            ]
+          }
+        ],
+        "proTips": [
+          "Don't wait for the GC to ask for closeouts—send them as soon as install is done.",
+          "Retainage is often held until the entire building is done—stay on top of it.",
+          "A smooth closeout leaves a lasting impression for the next project."
+        ]
+      }
+    }
+  ]
+}
