@@ -293,13 +293,10 @@ export default function ProjectManagement() {
             alt="Project Management Workflow: Contract -> Design -> Production -> Installation -> Closeout" 
             className="w-full h-auto object-cover rounded-lg"
           />
-        </div>
-        
-        {/* Scroll Indicator - Moved outside image container */}
-        <div className="flex justify-center -mt-6 relative z-10">
+          {/* Scroll Indicator - Positioned in the negative space */}
           <div 
             onClick={() => document.getElementById('project-stages-content')?.scrollIntoView({ behavior: 'smooth' })}
-            className="animate-bounce bg-white border shadow-md px-6 py-2 rounded-full text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:bg-gray-50 transition-colors"
+            className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce bg-white border shadow-md px-6 py-2 rounded-full text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:bg-gray-50 transition-colors"
           >
             <ChevronRight className="w-4 h-4 rotate-90" />
             Scroll for Details
