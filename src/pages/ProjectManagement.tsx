@@ -2,9 +2,85 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, PenTool, Factory, HardHat, ClipboardCheck, CheckCircle2, ChevronRight, Download, BookOpen, Copy, ThumbsUp, ThumbsDown } from "lucide-react";
+import { FileText, PenTool, Factory, HardHat, ClipboardCheck, CheckCircle2, ChevronRight, Download, BookOpen, Copy, ThumbsUp, ThumbsDown, ChevronLeft, Maximize2, X } from "lucide-react";
 import sopContentFull from "@/data/sopContentFull.json";
 import ReactMarkdown from 'react-markdown';
+import { motion, AnimatePresence } from "framer-motion";
+
+// Blueprint Slideshow Component
+const BlueprintSlideshow = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const totalSlides = 11; // Based on the file listing we saw
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
+
+  // Format slide number to match filename (slide-01.png, slide-02.png, etc.)
+  const getSlidePath = (index: number) => {
+    const slideNum = (index + 1).toString().padStart(2, '0');
+    return `/images/blueprint/slide-${slideNum}.png`;
+  };
+
+  return (
+    <div className={`relative group ${isFullscreen ? 'fixed inset-0 z-50 bg-black flex items-center justify-center p-4' : 'w-full aspect-video bg-slate-100 rounded-xl overflow-hidden shadow-lg mb-12'}`}>
+      
+      {/* Main Image */}
+      <div className={`relative ${isFullscreen ? 'h-full w-full flex items-center justify-center' : 'w-full h-full'}`}>
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentSlide}
+            src={getSlidePath(currentSlide)}
+            alt={`Project Blueprint Slide ${currentSlide + 1}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className={`${isFullscreen ? 'max-h-full max-w-full object-contain' : 'w-full h-full object-contain'}`}
+          />
+        </AnimatePresence>
+
+        {/* Navigation Overlay */}
+        <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button 
+            onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+            className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors backdrop-blur-sm"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button 
+            onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+            className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors backdrop-blur-sm"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-between items-end">
+          <div className="text-white text-sm font-medium px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm">
+            Slide {currentSlide + 1} of {totalSlides}
+          </div>
+          <button 
+            onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }}
+            className="p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors backdrop-blur-sm"
+          >
+            {isFullscreen ? <X className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function ProjectManagement() {
   const [activeStageId, setActiveStageId] = useState(1);
@@ -31,6 +107,31 @@ export default function ProjectManagement() {
           Your interactive guide to the Moon River Sign Company project lifecycle.
           Click a stage below to access the full SOP manual for that phase.
         </p>
+      </div>
+
+      {/* Blueprint Slideshow Section */}
+      <div className="mb-16">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+              <BookOpen className="w-6 h-6 text-primary" />
+              The Project Blueprint
+            </h2>
+            <p className="text-muted-foreground mt-1">
+              Visual guide to the D10 SOP workflow. Review this before diving into the chapters below.
+            </p>
+          </div>
+          <a 
+            href="/D10_Project_Blueprint.pdf" 
+            download
+            className="flex items-center gap-2 px-4 py-2 bg-background border border-border rounded-lg text-sm font-medium text-foreground hover:bg-accent transition-colors shadow-sm"
+          >
+            <Download className="w-4 h-4" />
+            Download PDF
+          </a>
+        </div>
+        
+        <BlueprintSlideshow />
       </div>
 
       {/* Interactive Infographic Navigation */}
