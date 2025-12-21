@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import projectManagementInfographic from "@/assets/project-management-infographic.png";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CheckCircle2, AlertCircle, FileText, Truck, HardHat, ClipboardCheck, PenTool, ShieldCheck, CheckSquare, Play, Pause, Maximize2, X, ChevronLeft, ChevronRight, Presentation, Network, BrainCircuit } from "lucide-react";
@@ -288,7 +289,7 @@ export default function ProjectManagement() {
         {/* 5-Stage Isometric Infographic */}
         <div className="w-full bg-white rounded-xl shadow-sm border p-2 overflow-hidden">
           <img 
-            src="/images/project-management-infographic.png" 
+            src={projectManagementInfographic} 
             alt="Project Management Workflow: Contract -> Design -> Production -> Installation -> Closeout" 
             className="w-full h-auto object-cover rounded-lg"
           />
