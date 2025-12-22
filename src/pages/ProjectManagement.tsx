@@ -273,28 +273,7 @@ export default function ProjectManagement() {
               className="w-full h-auto block"
             />
             
-            {/* HTML Text Overlays - Positioned to match the clean plate */}
-            <div className="absolute inset-0 pointer-events-none">
-              {/* Stage 1 Title */}
-              <div className="absolute top-[18%] left-[12%] w-[18%] text-center">
-                <h3 className="text-lg md:text-xl font-bold text-blue-900 leading-tight">Estimating & Sales</h3>
-              </div>
-              
-              {/* Stage 2 Title */}
-              <div className="absolute top-[18%] left-[37%] w-[18%] text-center">
-                <h3 className="text-lg md:text-xl font-bold text-blue-900 leading-tight">Design & Approval</h3>
-              </div>
-              
-              {/* Stage 3 Title */}
-              <div className="absolute top-[18%] left-[62%] w-[18%] text-center">
-                <h3 className="text-lg md:text-xl font-bold text-blue-900 leading-tight">Production & Delivery</h3>
-              </div>
-              
-              {/* Stage 4 Title */}
-              <div className="absolute top-[18%] left-[87%] w-[18%] text-center transform -translate-x-1/2">
-                <h3 className="text-lg md:text-xl font-bold text-blue-900 leading-tight">Installation</h3>
-              </div>
-            </div>
+            {/* HTML Text Overlays Removed - Image contains text */}
 
           </div>
 
