@@ -30,10 +30,10 @@ import { cn } from "@/lib/utils";
 export default function ProjectManagement() {
   const [activeStep, setActiveStep] = useState("step1");
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const totalSlides = 12; // Assuming 12 slides for now
+  const totalSlides = 15; // Updated to 15 slides based on conversion
 
   // Auto-play effect
   useEffect(() => {
@@ -382,15 +382,97 @@ export default function ProjectManagement() {
                 </Button>
               </div>
 
-              {/* Google Drive Embed Container */}
-              <div className="aspect-video w-full max-w-5xl mx-auto bg-neutral-100 rounded-xl overflow-hidden shadow-2xl border border-neutral-200">
-                <iframe 
-                  src="https://drive.google.com/file/d/1riniiwRHP5b_6XwAGZd9_h0Hi_AzK_i6/preview" 
-                  width="100%" 
-                  height="100%" 
-                  allow="autoplay"
-                  className="border-0"
-                ></iframe>
+              {/* Custom Slideshow Player */}
+              <div className={cn(
+                "relative bg-black rounded-xl overflow-hidden shadow-2xl transition-all duration-500 group",
+                isFullscreen ? "fixed inset-0 z-50 rounded-none" : "aspect-video w-full max-w-5xl mx-auto"
+              )}>
+                {/* Close Fullscreen Button */}
+                {isFullscreen && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-4 right-4 z-50 text-white hover:bg-white/20"
+                    onClick={toggleFullscreen}
+                  >
+                    <X className="w-8 h-8" />
+                  </Button>
+                )}
+
+                {/* Main Slide Image */}
+                <div className="absolute inset-0 flex items-center justify-center bg-neutral-900">
+                  {!imgError ? (
+                    <img 
+                      src={`/images/slide-${String(currentSlide + 1).padStart(2, '0')}.png`}
+                      alt={`Slide ${currentSlide + 1}`}
+                      className="max-h-full max-w-full object-contain"
+                      onError={() => setImgError(true)}
+                    />
+                  ) : (
+                    <div className="text-white/50 flex flex-col items-center">
+                      <p className="text-4xl font-bold mb-4">Image Not Found</p>
+                      <p>slide-{String(currentSlide + 1).padStart(2, '0')}.png</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Navigation Arrows (Large, Side-mounted) */}
+                <button 
+                  onClick={prevSlide}
+                  className="absolute left-0 top-0 bottom-0 w-24 flex items-center justify-center text-white/50 hover:text-white hover:bg-black/20 transition-all duration-300 focus:outline-none"
+                  aria-label="Previous Slide"
+                >
+                  <ChevronLeft className="w-12 h-12" />
+                </button>
+                
+                <button 
+                  onClick={nextSlide}
+                  className="absolute right-0 top-0 bottom-0 w-24 flex items-center justify-center text-white/50 hover:text-white hover:bg-black/20 transition-all duration-300 focus:outline-none"
+                  aria-label="Next Slide"
+                >
+                  <ChevronRight className="w-12 h-12" />
+                </button>
+
+                {/* Bottom Controls Bar */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between">
+                  
+                  {/* Left Controls */}
+                  <div className="flex items-center gap-4">
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="text-white hover:bg-white/20"
+                      onClick={togglePlay}
+                    >
+                      {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+                    </Button>
+                    
+                    <div className="text-white/90 font-medium font-mono">
+                      {currentSlide + 1} / {totalSlides}
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="flex-1 mx-6 h-1.5 bg-white/20 rounded-full overflow-hidden cursor-pointer" onClick={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const percentage = x / rect.width;
+                    const newSlide = Math.floor(percentage * totalSlides);
+                    setCurrentSlide(newSlide);
+                  }}>
+                    <div 
+                      className="h-full bg-primary transition-all duration-300 ease-linear"
+                      style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
+                    />
+                  </div>
+
+                  {/* Right Controls */}
+                  <div className="flex items-center gap-2">
+                    <Button variant="ghost" size="icon" className="text-white hover:bg-white/20" onClick={toggleFullscreen}>
+                      <Maximize2 className="w-5 h-5" />
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </TabsContent>
