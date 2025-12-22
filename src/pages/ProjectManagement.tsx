@@ -296,16 +296,17 @@ export default function ProjectManagement() {
               </div>
             </div>
 
-            {/* Scroll Button Overlay - Positioned at bottom center */}
-            <div className="absolute bottom-8 left-0 right-0 flex justify-center pointer-events-auto">
-              <Button 
-                onClick={scrollToContent}
-                className="bg-white/90 hover:bg-white text-primary shadow-lg backdrop-blur-sm border border-primary/20 rounded-full px-6 py-6 h-auto flex flex-col items-center gap-1 animate-bounce"
-              >
-                <span className="font-bold text-sm uppercase tracking-wider">Scroll for Details</span>
-                <ArrowDown className="w-5 h-5" />
-              </Button>
-            </div>
+          </div>
+
+          {/* Scroll Button - Moved below the image */}
+          <div className="flex justify-center mt-8">
+            <Button 
+              onClick={scrollToContent}
+              className="bg-white hover:bg-gray-50 text-primary shadow-lg border border-primary/20 rounded-full px-6 py-6 h-auto flex flex-col items-center gap-1 animate-bounce"
+            >
+              <span className="font-bold text-sm uppercase tracking-wider">Scroll for Details</span>
+              <ArrowDown className="w-5 h-5" />
+            </Button>
           </div>
         </div>
 
