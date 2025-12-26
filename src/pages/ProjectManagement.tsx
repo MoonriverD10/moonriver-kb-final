@@ -296,7 +296,7 @@ export default function ProjectManagement() {
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-1-roadmap.png" 
+                    src="/images/pm-workflow-panel-1-final.png" 
                     alt="Panel 1: Chapters 1-3 Road Map" 
                     className="w-full h-auto"
                   />
@@ -314,7 +314,7 @@ export default function ProjectManagement() {
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-2-roadmap.png" 
+                    src="/images/pm-workflow-panel-2-final.png" 
                     alt="Panel 2: Chapters 4-6 Road Map" 
                     className="w-full h-auto"
                   />
@@ -332,7 +332,7 @@ export default function ProjectManagement() {
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-3-roadmap.png" 
+                    src="/images/pm-workflow-panel-3-final.png" 
                     alt="Panel 3: Chapters 7-9 Road Map" 
                     className="w-full h-auto"
                   />
@@ -346,37 +346,22 @@ export default function ProjectManagement() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">4</div>
-                  <h3 className="text-2xl font-bold">Logistics & Installation</h3>
+                  <h3 className="text-2xl font-bold">Closeout & Final Payment</h3>
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-4.png" 
-                    alt="Panel 4: Logistics & Installation Workflow" 
+                    src="/images/pm-workflow-panel-4-final.png" 
+                    alt="Panel 4: Chapters 10-11 Road Map" 
                     className="w-full h-auto"
                   />
                 </div>
                 <p className="text-muted-foreground italic">
-                  Key Steps: Shipping, Site Prep, Safety, Installation, Field Adjustments.
+                  The Finish Line: Close-Out Docs, Final Payment, Archiving, and the "Thank You" to the General Contractor.
                 </p>
               </div>
 
-              {/* Panel 5 */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">5</div>
-                  <h3 className="text-2xl font-bold">Closeout</h3>
-                </div>
-                <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
-                  <img 
-                    src="/images/pm-workflow-panel-5.png" 
-                    alt="Panel 5: Closeout Workflow" 
-                    className="w-full h-auto"
-                  />
-                </div>
-                <p className="text-muted-foreground italic">
-                  Key Steps: Punch List, Final Billing, Warranties, Handover, Rinse & Repeat.
-                </p>
-              </div>
+
+
             </div>
           </TabsContent>
 
