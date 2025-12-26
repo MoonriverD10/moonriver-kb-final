@@ -324,21 +324,21 @@ export default function ProjectManagement() {
                 </p>
               </div>
 
-              {/* Panel 3 */}
+{/* Panel 3 */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">3</div>
-                  <h3 className="text-2xl font-bold">Production</h3>
+                  <h3 className="text-2xl font-bold">Installation & Invoicing</h3>
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-3.png" 
-                    alt="Panel 3: Production Workflow" 
+                    src="/images/pm-workflow-panel-3-roadmap.png" 
+                    alt="Panel 3: Chapters 7-9 Road Map" 
                     className="w-full h-auto"
                   />
                 </div>
                 <p className="text-muted-foreground italic">
-                  Key Steps: Release to Production, Material Ordering, Fabrication, Assembly, Paint, QC.
+                  The Final Stretch: Coordinate Installers, Confirm Delivery & Dates, Complete Installation, and Process Final Invoicing (AIA/Retainage).
                 </p>
               </div>
 
