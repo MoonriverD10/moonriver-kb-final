@@ -239,330 +239,261 @@ export default function ProjectManagement() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card sticky top-0 z-50">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/">
-              <Button variant="ghost" size="sm" className="gap-2">
-                <ArrowLeft className="w-4 h-4" />
-                Back to Home
+              <Button variant="ghost" size="icon">
+                <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
-            <div className="h-6 w-px bg-border" />
-            <h1 className="text-xl font-bold text-foreground">Project Management Hub</h1>
+            <div className="flex items-center gap-2">
+              <LayoutDashboard className="h-6 w-6 text-primary" />
+              <h1 className="text-xl font-bold">Project Management Hub</h1>
+            </div>
           </div>
+          <Link href="/">
+            <Button variant="outline" size="sm" className="gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Home
+            </Button>
+          </Link>
         </div>
       </header>
 
-      <main className="container mx-auto px-6 py-8">
-        {/* Intro Section */}
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="text-4xl font-bold tracking-tight mb-4">Master the Workflow</h2>
-          <p className="text-xl text-muted-foreground">
-            From the first estimate to the final install, precision is our product.
-            Use this guide to navigate every stage of a Moon River project.
-          </p>
-        </div>
+      <main className="container mx-auto px-4 py-8">
+        <Tabs defaultValue="blueprint" className="space-y-8">
+          <TabsList className="grid w-full grid-cols-3 lg:w-[600px] mx-auto">
+            <TabsTrigger value="blueprint" className="gap-2">
+              <Network className="h-4 w-4" />
+              Visual Blueprint
+            </TabsTrigger>
+            <TabsTrigger value="manual" className="gap-2">
+              <BookOpen className="h-4 w-4" />
+              SOP Manual
+            </TabsTrigger>
+            <TabsTrigger value="mindmap" className="gap-2">
+              <BrainCircuit className="h-4 w-4" />
+              Interactive Mind Map
+            </TabsTrigger>
+          </TabsList>
 
-        {/* RESTORED: Infographic Section */}
-        <div className="relative w-full max-w-5xl mx-auto mb-16">
-          <div className="relative rounded-xl overflow-hidden shadow-2xl border border-border bg-card">
-            {/* Clean Plate Image */}
-            <img 
-              src="/images/project-management-infographic.png" 
-              alt="Project Management Workflow" 
-              className="w-full h-auto block"
-            />
-            
-            {/* HTML Text Overlays Removed - Image contains text */}
+          {/* Visual Blueprint Tab */}
+          <TabsContent value="blueprint" className="space-y-8">
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <h2 className="text-3xl font-bold mb-4">Project Management Workflow</h2>
+              <p className="text-muted-foreground text-lg">
+                A comprehensive visual guide to the Moon River project lifecycle, from contract award to final closeout.
+              </p>
+            </div>
 
-          </div>
-
-          {/* Scroll Button - Moved below the image */}
-          <div className="flex justify-center mt-8">
-            <Button 
-              onClick={scrollToContent}
-              className="bg-white hover:bg-gray-50 text-primary shadow-lg border border-primary/20 rounded-full px-6 py-6 h-auto flex flex-col items-center gap-1 animate-bounce"
-            >
-              <span className="font-bold text-sm uppercase tracking-wider">Scroll for Details</span>
-              <ArrowDown className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Main Content Tabs */}
-        <div id="main-content" className="scroll-mt-24">
-          <Tabs defaultValue="sop" className="space-y-8">
-            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4">
-              <TabsTrigger value="sop" className="flex items-center gap-2">
-                <FileText className="w-4 h-4" />
-                SOP Manual
-              </TabsTrigger>
-              <TabsTrigger value="blueprint" className="flex items-center gap-2">
-                <Presentation className="w-4 h-4" />
-                Visual Blueprint
-              </TabsTrigger>
-              <TabsTrigger value="mindmap" className="flex items-center gap-2">
-                <Network className="w-4 h-4" />
-                Interactive Mind Map
-              </TabsTrigger>
-              <TabsTrigger value="flashcards" className="flex items-center gap-2">
-                <BrainCircuit className="w-4 h-4" />
-                Knowledge Check
-              </TabsTrigger>
-            </TabsList>
-
-            {/* TAB 1: SOP MANUAL */}
-            <TabsContent value="sop" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="grid lg:grid-cols-12 gap-8">
-                {/* Left Column: Navigation */}
-                <div className="lg:col-span-4 space-y-4">
-                  <div className="sticky top-24">
-                    <h2 className="text-lg font-semibold mb-4 px-2">Project Stages</h2>
-                    <div className="space-y-3">
-                      {steps.map((step) => {
-                        const Icon = step.icon;
-                        const isActive = activeStep === step.id;
-                        return (
-                          <div
-                            key={step.id}
-                            onClick={() => setActiveStep(step.id)}
-                            className={cn(
-                              "w-full text-left p-4 rounded-xl border transition-all duration-200 group relative overflow-hidden cursor-pointer",
-                              isActive 
-                                ? "bg-primary text-primary-foreground border-primary shadow-lg scale-[1.02]" 
-                                : "bg-card hover:bg-accent hover:border-primary/50"
-                            )}
-                          >
-                            <div className="flex items-start gap-4 relative z-10">
-                              <div className={cn(
-                                "p-2 rounded-lg transition-colors",
-                                isActive ? "bg-primary-foreground/20" : "bg-muted group-hover:bg-background"
-                              )}>
-                                <Icon className="w-6 h-6" />
-                              </div>
-                              <div>
-                                <div className="font-bold text-sm uppercase tracking-wide opacity-90 mb-1">
-                                  {step.title}
-                                </div>
-                                <div className={cn(
-                                  "text-xs",
-                                  isActive ? "text-primary-foreground/80" : "text-muted-foreground"
-                                )}>
-                                  {step.description}
-                                </div>
-                              </div>
-                            </div>
-                            
-                            {/* Active Indicator Arrow */}
-                            {isActive && (
-                              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-4 h-4 bg-primary"></div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
+            {/* 5-Panel Infographic Series */}
+            <div className="space-y-12">
+              {/* Panel 1 */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">1</div>
+                  <h3 className="text-2xl font-bold">Contract & Setup</h3>
                 </div>
+                <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
+                  <img 
+                    src="/images/pm-workflow-panel-1-v2.png" 
+                    alt="Panel 1: Chapters 1-3 Workflow" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-muted-foreground italic">
+                  Key Steps: Chapter 1 (Award & Review), Chapter 2 (Execute Contract), Chapter 3 (Start-up Docs: COI, SOV, Misc).
+                </p>
+              </div>
 
-                {/* Right Column: Content */}
-                <div className="lg:col-span-8">
-                  <Card className="min-h-[600px] shadow-xl border-muted">
-                    <CardHeader className="border-b bg-muted/30 pb-6">
-                      <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">
-                        In This Section
-                      </div>
-                      <CardTitle className="text-3xl flex items-center gap-3">
-                        {steps.find(s => s.id === activeStep)?.icon && (
-                          <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                            {(() => {
-                              const Icon = steps.find(s => s.id === activeStep)!.icon;
-                              return <Icon className="w-8 h-8" />;
-                            })()}
-                          </div>
-                        )}
-                        {steps.find(s => s.id === activeStep)?.title.split(". ")[1]}
-                      </CardTitle>
-                      <CardDescription className="text-lg mt-2">
-                        {steps.find(s => s.id === activeStep)?.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="p-8">
-                      <ScrollArea className="h-[600px] pr-6">
-                        {steps.find(s => s.id === activeStep)?.content}
-                      </ScrollArea>
-                    </CardContent>
-                  </Card>
+              {/* Panel 2 */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">2</div>
+                  <h3 className="text-2xl font-bold">Design & Submittals</h3>
+                </div>
+                <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
+                  <img 
+                    src="/images/pm-workflow-panel-2.png" 
+                    alt="Panel 2: Design & Submittals Workflow" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-muted-foreground italic">
+                  Key Steps: Shop Drawings, Material Samples, Engineering, Approval Loop.
+                </p>
+              </div>
+
+              {/* Panel 3 */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">3</div>
+                  <h3 className="text-2xl font-bold">Production</h3>
+                </div>
+                <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
+                  <img 
+                    src="/images/pm-workflow-panel-3.png" 
+                    alt="Panel 3: Production Workflow" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-muted-foreground italic">
+                  Key Steps: Release to Production, Material Ordering, Fabrication, Assembly, Paint, QC.
+                </p>
+              </div>
+
+              {/* Panel 4 */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">4</div>
+                  <h3 className="text-2xl font-bold">Logistics & Installation</h3>
+                </div>
+                <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
+                  <img 
+                    src="/images/pm-workflow-panel-4.png" 
+                    alt="Panel 4: Logistics & Installation Workflow" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-muted-foreground italic">
+                  Key Steps: Shipping, Site Prep, Safety, Installation, Field Adjustments.
+                </p>
+              </div>
+
+              {/* Panel 5 */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">5</div>
+                  <h3 className="text-2xl font-bold">Closeout</h3>
+                </div>
+                <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
+                  <img 
+                    src="/images/pm-workflow-panel-5.png" 
+                    alt="Panel 5: Closeout Workflow" 
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="text-muted-foreground italic">
+                  Key Steps: Punch List, Final Billing, Warranties, Handover, Rinse & Repeat.
+                </p>
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* SOP Manual Tab */}
+          <TabsContent value="manual">
+            <div className="grid lg:grid-cols-[300px_1fr] gap-8">
+              {/* Sidebar Navigation */}
+              <div className="space-y-4">
+                <div className="sticky top-24 space-y-2">
+                  <h3 className="font-bold text-lg px-2 mb-4">Quick Navigation</h3>
+                  {steps.map((step) => (
+                    <button
+                      key={step.id}
+                      onClick={() => {
+                        setActiveStep(step.id);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className={cn(
+                        "w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3",
+                        activeStep === step.id 
+                          ? "bg-primary text-primary-foreground shadow-md" 
+                          : "hover:bg-accent text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      <step.icon className="h-5 w-5 shrink-0" />
+                      <div className="line-clamp-1 font-medium">{step.title}</div>
+                    </button>
+                  ))}
                 </div>
               </div>
-            </TabsContent>
 
-            {/* TAB 2: VISUAL BLUEPRINT */}
-            <TabsContent value="blueprint" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                      <Presentation className="w-6 h-6 text-primary" />
-                      The Project Blueprint
-                    </h2>
-                    <p className="text-muted-foreground mt-1">
-                      Visual guide to the D10 SOP workflow. Flip through the slides below.
-                    </p>
+              {/* Main Content Area */}
+              <div className="space-y-8">
+                {steps.map((step) => (
+                  <div 
+                    key={step.id} 
+                    className={cn(
+                      "scroll-mt-24 transition-all duration-500",
+                      activeStep === step.id ? "opacity-100" : "hidden"
+                    )}
+                  >
+                    <Card className="border-2 shadow-lg">
+                      <CardHeader className="border-b bg-muted/30 pb-8">
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="p-3 bg-primary/10 rounded-xl">
+                            <step.icon className="h-8 w-8 text-primary" />
+                          </div>
+                          <div>
+                            <CardTitle className="text-3xl">{step.title}</CardTitle>
+                            <CardDescription className="text-lg mt-1">
+                              {step.description}
+                            </CardDescription>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="p-8">
+                        {step.content}
+                      </CardContent>
+                    </Card>
+
+                    {/* Navigation Footer */}
+                    <div className="flex justify-between mt-8">
+                      <Button
+                        variant="outline"
+                        disabled={activeStep === "step1"}
+                        onClick={() => {
+                          const currentIndex = steps.findIndex(s => s.id === activeStep);
+                          if (currentIndex > 0) {
+                            setActiveStep(steps[currentIndex - 1].id);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }
+                        }}
+                      >
+                        <ChevronLeft className="mr-2 h-4 w-4" />
+                        Previous Chapter
+                      </Button>
+                      <Button
+                        disabled={activeStep === steps[steps.length - 1].id}
+                        onClick={() => {
+                          const currentIndex = steps.findIndex(s => s.id === activeStep);
+                          if (currentIndex < steps.length - 1) {
+                            setActiveStep(steps[currentIndex + 1].id);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }
+                        }}
+                      >
+                        Next Chapter
+                        <ChevronRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
-                  <Button variant="outline" className="gap-2" asChild>
-                    <a href="https://drive.google.com/file/d/1riniiwRHP5b_6XwAGZd9_h0Hi_AzK_i6/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="w-4 h-4" />
-                      Open in Drive
-                    </a>
+                ))}
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Interactive Mind Map Tab */}
+          <TabsContent value="mindmap">
+            <Card>
+              <CardHeader>
+                <CardTitle>Interactive Workflow Map</CardTitle>
+                <CardDescription>
+                  Explore the interconnected relationships between departments and processes.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="h-[600px] flex items-center justify-center bg-muted/20">
+                <div className="text-center space-y-4">
+                  <BrainCircuit className="h-16 w-16 text-muted-foreground mx-auto opacity-50" />
+                  <p className="text-muted-foreground">Interactive Mind Map module coming soon...</p>
+                  <Button variant="outline" onClick={() => setActiveStep("step1")}>
+                    View SOP Manual Instead
                   </Button>
                 </div>
-
-                {/* Custom Slideshow Player */}
-                <div className={cn(
-                  "relative bg-black rounded-xl overflow-hidden shadow-2xl transition-all duration-500 group",
-                  isFullscreen ? "fixed inset-0 z-50 rounded-none" : "aspect-video w-full max-w-5xl mx-auto"
-                )}>
-                  {/* Close Fullscreen Button */}
-                  {isFullscreen && (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute top-4 right-4 z-50 text-white hover:bg-white/20"
-                      onClick={toggleFullscreen}
-                    >
-                      <X className="w-8 h-8" />
-                    </Button>
-                  )}
-
-                  {/* Main Slide Image */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-neutral-900">
-                    {!imgError ? (
-                      <img 
-                        src={`/images/slide-${String(currentSlide + 1).padStart(2, '0')}.png`}
-                        alt={`Slide ${currentSlide + 1}`}
-                        className="max-h-full max-w-full object-contain"
-                        onError={() => setImgError(true)}
-                      />
-                    ) : (
-                      <div className="text-white/50 flex flex-col items-center">
-                        <p className="text-4xl font-bold mb-4">Image Not Found</p>
-                        <p>slide-{String(currentSlide + 1).padStart(2, '0')}.png</p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Navigation Arrows (Large, Side-mounted) */}
-                  <button 
-                    onClick={prevSlide}
-                    className="absolute left-0 top-0 bottom-0 w-24 flex items-center justify-center text-white/50 hover:text-white hover:bg-black/20 transition-all duration-300 focus:outline-none"
-                    aria-label="Previous Slide"
-                  >
-                    <ChevronLeft className="w-12 h-12" />
-                  </button>
-                  
-                  <button 
-                    onClick={nextSlide}
-                    className="absolute right-0 top-0 bottom-0 w-24 flex items-center justify-center text-white/50 hover:text-white hover:bg-black/20 transition-all duration-300 focus:outline-none"
-                    aria-label="Next Slide"
-                  >
-                    <ChevronRight className="w-12 h-12" />
-                  </button>
-
-                  {/* Bottom Controls Bar */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between">
-                    
-                    {/* Left Controls */}
-                    <div className="flex items-center gap-4">
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
-                        className="text-white hover:bg-white/20"
-                        onClick={togglePlay}
-                      >
-                        {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
-                      </Button>
-                      
-                      <div className="text-white/90 font-medium font-mono">
-                        {currentSlide + 1} / {totalSlides}
-                      </div>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="flex-1 mx-6 h-1.5 bg-white/20 rounded-full overflow-hidden cursor-pointer" onClick={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
-                      const percentage = x / rect.width;
-                      const newSlide = Math.floor(percentage * totalSlides);
-                      setCurrentSlide(newSlide);
-                    }}>
-                      <div 
-                        className="h-full bg-primary transition-all duration-300 ease-linear"
-                        style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
-                      />
-                    </div>
-
-                    {/* Right Controls */}
-                    <div className="flex items-center gap-2">
-                      <Button variant="ghost" size="icon" className="text-white hover:bg-white/20" onClick={toggleFullscreen}>
-                        <Maximize2 className="w-5 h-5" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-
-            {/* TAB 3: INTERACTIVE MIND MAP */}
-            <TabsContent value="mindmap" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                      <Network className="w-6 h-6 text-primary" />
-                      Process Mind Map
-                    </h2>
-                    <p className="text-muted-foreground mt-1">
-                      Explore the connections between different departments and tasks.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="aspect-video w-full bg-muted/30 rounded-xl border-2 border-dashed border-muted flex items-center justify-center">
-                  <div className="text-center text-muted-foreground">
-                    <Network className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg font-medium">Interactive Mind Map Coming Soon</p>
-                    <p className="text-sm">This feature is currently under development.</p>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-
-            {/* TAB 4: KNOWLEDGE CHECK */}
-            <TabsContent value="flashcards" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                      <BrainCircuit className="w-6 h-6 text-primary" />
-                      Knowledge Check
-                    </h2>
-                    <p className="text-muted-foreground mt-1">
-                      Test your understanding of the Moon River SOPs.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="aspect-video w-full bg-muted/30 rounded-xl border-2 border-dashed border-muted flex items-center justify-center">
-                  <div className="text-center text-muted-foreground">
-                    <BrainCircuit className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg font-medium">Flashcards Coming Soon</p>
-                    <p className="text-sm">This feature is currently under development.</p>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-          </Tabs>
-        </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </main>
     </div>
   );
