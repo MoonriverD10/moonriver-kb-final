@@ -279,10 +279,13 @@ export default function ProjectManagement() {
 
           {/* Visual Blueprint Tab */}
           <TabsContent value="blueprint" className="space-y-8">
-            <div className="text-center max-w-3xl mx-auto mb-8">
-              <h2 className="text-3xl font-bold mb-4">Project Management Workflow</h2>
-              <p className="text-muted-foreground text-lg">
-                A comprehensive visual guide to the Moon River project lifecycle, from contract award to final closeout.
+            <div className="text-center max-w-3xl mx-auto mb-8 bg-blue-50/50 dark:bg-blue-950/20 p-8 rounded-2xl border border-blue-100 dark:border-blue-900">
+              <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-4">
+                <Map className="h-8 w-8 text-primary" />
+              </div>
+              <h2 className="text-4xl font-bold mb-4 text-primary">Student Overview: The Project Journey</h2>
+              <p className="text-muted-foreground text-xl leading-relaxed">
+                Your complete educational roadmap for mastering the Moon River project management workflow. Follow the path below from start to finish to understand every milestone.
               </p>
             </div>
 
@@ -296,7 +299,7 @@ export default function ProjectManagement() {
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-1-final.png" 
+                    src="/images/pm-workflow-panel-1-roadmap.png" 
                     alt="Panel 1: Chapters 1-3 Road Map" 
                     className="w-full h-auto"
                   />
@@ -314,7 +317,7 @@ export default function ProjectManagement() {
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-2-final.png" 
+                    src="/images/pm-workflow-panel-2-roadmap-blue.png" 
                     alt="Panel 2: Chapters 4-6 Road Map" 
                     className="w-full h-auto"
                   />
@@ -332,7 +335,7 @@ export default function ProjectManagement() {
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-3-final.png" 
+                    src="/images/pm-workflow-panel-3-roadmap-blue.png" 
                     alt="Panel 3: Chapters 7-9 Road Map" 
                     className="w-full h-auto"
                   />
@@ -350,7 +353,7 @@ export default function ProjectManagement() {
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-4-final.png" 
+                    src="/images/pm-workflow-panel-4-roadmap-blue.png" 
                     alt="Panel 4: Chapters 10-11 Road Map" 
                     className="w-full h-auto"
                   />
