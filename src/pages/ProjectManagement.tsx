@@ -296,13 +296,13 @@ export default function ProjectManagement() {
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-1-v2.png" 
-                    alt="Panel 1: Chapters 1-3 Workflow" 
+                    src="/images/pm-workflow-panel-1-roadmap.png" 
+                    alt="Panel 1: Chapters 1-3 Road Map" 
                     className="w-full h-auto"
                   />
                 </div>
                 <p className="text-muted-foreground italic">
-                  Key Steps: Chapter 1 (Award & Review), Chapter 2 (Execute Contract), Chapter 3 (Start-up Docs: COI, SOV, Misc).
+                  Follow the Road: Start at Contract Award, proceed through Review & Execution, and complete Start-up Docs before moving to Design.
                 </p>
               </div>
 
