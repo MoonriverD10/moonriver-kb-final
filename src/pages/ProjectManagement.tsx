@@ -306,21 +306,21 @@ export default function ProjectManagement() {
                 </p>
               </div>
 
-              {/* Panel 2 */}
+{/* Panel 2 */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="bg-primary text-primary-foreground w-8 h-8 rounded-full flex items-center justify-center font-bold">2</div>
-                  <h3 className="text-2xl font-bold">Design & Submittals</h3>
+                  <h3 className="text-2xl font-bold">System Setup & Approvals</h3>
                 </div>
                 <div className="rounded-xl overflow-hidden border shadow-lg bg-card">
                   <img 
-                    src="/images/pm-workflow-panel-2.png" 
-                    alt="Panel 2: Design & Submittals Workflow" 
+                    src="/images/pm-workflow-panel-2-roadmap.png" 
+                    alt="Panel 2: Chapters 4-6 Road Map" 
                     className="w-full h-auto"
                   />
                 </div>
                 <p className="text-muted-foreground italic">
-                  Key Steps: Shop Drawings, Material Samples, Engineering, Approval Loop.
+                  Continuing the Journey: System Setup (Trello/QB), Submittals & Quotes, Waiting for Approval, and finally Release to Production.
                 </p>
               </div>
 
